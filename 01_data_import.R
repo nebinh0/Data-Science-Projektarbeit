@@ -791,12 +791,12 @@ data_raw <- read.csv (
     na.last = NA
   )[1:20]  
  
-  #Prüfung Feature Z7022_at 
-  summary(analysis_matrix[, "Z7022_at"])
+  #Prüfung Feature Z70222_at 
+  summary(analysis_matrix[, "Z70222_at"])
 
   colnames(analysis_matrix)[5197]  
   grep("Z7022", colnames(analysis_matrix), value = TRUE)  
-  grep("Z7022", features, value = TRUE)  
+  grep("Z70222", features, value = TRUE)  
 
   summary(analysis_matrix[, 5197])  
   sample35 <- samples_list[[which(metadata$Sample == 35)]]
