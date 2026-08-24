@@ -1148,7 +1148,7 @@ data_raw <- read.csv (
   u60319 <- analysis_matrix[, "U60319_at"]
   summary(u60319)
   sort(u60319)  
-  z7022 <- analysis_matrix[, "Z70222_at"]
+  z70222 <- analysis_matrix[, "Z70222_at"]
   summary(z70222)  
   sort(z70222)  
   
