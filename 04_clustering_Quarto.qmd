@@ -1,0 +1,197 @@
+---
+title: "Data Science Projekt – Golub Dataset"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+source("01_data_import_final.R")
+library(pheatmap)
+```
+
+## Clustering
+
+Ziel der Clusteranalyse war es zu untersuchen, ob sich anhand der Genexpressionsprofile ohne Verwendung der bekannten Diagnose natürliche Gruppen innerhalb der Proben identifizieren lassen und ob diese Gruppen mit den Diagnosen ALL und AML übereinstimmen.
+
+### Datenvorbereitung
+
+Für die Clusteranalyse wurde die zuvor bereinigte Expressionsmatrix verwendet. Features mit fehlenden Werten wurden ausgeschlossen, da die verwendeten Distanz- und Clusteringverfahren vollständige Daten voraussetzen. Anschließend wurden die 25 % der Features mit der höchsten Varianz ausgewählt. Dadurch sollten wenig variable Features, die nur wenig zur Unterscheidung der Proben beitragen, bei der Distanzberechnung weniger Einfluss erhalten. Die Feature-Auswahl erfolgte unabhängig von der bekannten Diagnose, um den unüberwachten Charakter der Clusteranalyse zu erhalten.
+
+Die ausgewählten Features wurden anschließend standardisiert. Dadurch besitzen die Features einen Mittelwert von 0 und eine Standardabweichung von 1, sodass Unterschiede in der Größenordnung der Expressionswerte die Distanzberechnung nicht dominieren.
+
+```{r}
+features_with_na <- colSums(is.na(analysis_matrix)) > 0
+clustering_matrix <- analysis_matrix[, !features_with_na]
+
+feature_variance <- apply(clustering_matrix, 2, var)
+variance_cutoff <- quantile(feature_variance, 0.75)
+variable_features <- feature_variance >= variance_cutoff
+
+clustering_variable <- clustering_matrix[, variable_features]
+clustering_scaled <- scale(clustering_variable)
+```
+
+### Hierarchisches Clustering
+
+Für das hierarchische Clustering wurden euklidische Distanzen zwischen den Proben auf Grundlage der standardisierten Expressionswerte berechnet. Als Linkage-Methode wurde Ward.D2 verwendet. Dabei werden schrittweise diejenigen Cluster zusammengeführt, deren Zusammenführung zu einem möglichst geringen Anstieg der Streuung innerhalb der Cluster führt. Das resultierende Dendrogramm wurde anschließend in zwei Cluster unterteilt, um die erhaltene Gruppierung mit den beiden Diagnosen ALL und AML vergleichen zu können.
+
+```{r}
+#| label: fig-hierarchical
+#| fig-cap: "Hierarchisches Clustering der Proben anhand der Genexpressionsprofile."
+
+sample_dist <- dist(clustering_scaled, method = "euclidean")
+hc <- hclust(sample_dist, method = "ward.D2")
+
+plot(
+  hc,
+  main = "Hierarchisches Clustering der Proben",
+  xlab = "Probe",
+  ylab = "Distanz",
+  sub = ""
+)
+
+hc_clusters <- cutree(hc, k = 2)
+```
+
+### Vergleich mit der ALL/AML-Diagnose
+
+Das hierarchische Clustering ergab zwei unterschiedlich große Cluster. Cluster 1 umfasste 16 Proben und Cluster 2 umfasste 56 Proben. Um zu untersuchen, ob diese Gruppierung mit der bekannten Diagnose übereinstimmt, wurde die Verteilung der ALL- und AML-Proben auf die beiden Cluster betrachtet.
+
+```{r}
+cluster_diagnosis <- table(
+  Cluster = hc_clusters,
+  Diagnosis = metadata$Diagnosis
+)
+
+cluster_diagnosis
+```
+
+Cluster 1 enthielt 10 ALL- und 6 AML-Proben, während Cluster 2 aus 37 ALL- und 19 AML-Proben bestand. Beide Diagnosen waren somit in beiden Clustern vertreten. Eine eindeutige Trennung der Proben nach ALL und AML war anhand der Clusterzugehörigkeit nicht erkennbar.
+
+Um zu prüfen, ob dennoch ein statistischer Zusammenhang zwischen Clusterzugehörigkeit und Diagnose bestand, wurde ein Fisher-Exakt-Test durchgeführt.
+
+```{r}
+fisher_result <- fisher.test(cluster_diagnosis)
+fisher_result
+```
+
+Der Fisher-Exakt-Test ergab keinen statistisch signifikanten Zusammenhang zwischen Clusterzugehörigkeit und ALL/AML-Diagnose (p = 0,775). Die durch das hierarchische Clustering identifizierte Gruppierung entsprach somit nicht der bekannten diagnostischen Einteilung in ALL und AML.
+
+### Heatmap der Expressionsprofile
+
+Zur Visualisierung der Expressionsmuster wurden die 50 Features mit der höchsten Varianz dargestellt. Die Heatmap basiert auf den zuvor standardisierten Expressionswerten. Die Proben wurden in der Heatmap erneut anhand euklidischer Distanzen und Ward.D2 hierarchisch angeordnet. Zusätzlich wurde die bekannte ALL/AML-Diagnose der einzelnen Proben als Annotation dargestellt.
+
+```{r}
+#| label: fig-heatmap
+#| fig-cap: "Heatmap der 50 variabelsten Features. Die Annotation zeigt die bekannte ALL/AML-Diagnose der Proben."
+#| fig-width: 10
+#| fig-height: 8
+
+top50_names <- names(sort(feature_variance, decreasing = TRUE)[1:50])
+
+heatmap_matrix <- clustering_scaled[, top50_names]
+heatmap_matrix_t <- t(heatmap_matrix)
+
+annotation_col <- data.frame(
+  Diagnosis = metadata$Diagnosis
+)
+rownames(annotation_col) <- metadata$Sample
+
+pheatmap(
+  heatmap_matrix_t,
+  annotation_col = annotation_col,
+  cluster_rows = TRUE,
+  cluster_cols = TRUE,
+  clustering_distance_cols = "euclidean",
+  clustering_method = "ward.D2",
+  show_colnames = FALSE,
+  main = "Expressionsprofile der 50 variabelsten Features"
+)
+```
+
+Die Heatmap zeigte deutliche Unterschiede in den Expressionsmustern zwischen einzelnen Probengruppen. Die ALL- und AML-Proben waren jedoch über die verschiedenen Äste des hierarchischen Clusterings verteilt und bildeten keine klar voneinander getrennten Gruppen. Damit unterstützt die Visualisierung das Ergebnis des vorherigen Vergleichs zwischen Clusterzugehörigkeit und Diagnose.
+
+Die Heatmap dient dabei primär der Visualisierung charakteristischer Expressionsmuster und basiert aus Gründen der Darstellbarkeit nur auf den 50 variabelsten Features, während das zuvor durchgeführte hierarchische Clustering auf den 25 % variabelsten Features basierte.
+
+### K-means-Clustering
+
+Ergänzend zum hierarchischen Clustering wurde ein k-means-Clustering mit zwei Clustern durchgeführt. Dadurch sollte untersucht werden, ob ein alternatives unüberwachtes Clusteringverfahren eine vergleichbare Gruppierung der Proben ergibt. Um den Einfluss der zufälligen Initialisierung zu reduzieren, wurden 25 verschiedene Startkonfigurationen verwendet. Für die Reproduzierbarkeit wurde zuvor ein fester Zufallsstart gesetzt.
+
+```{r}
+set.seed(123)
+
+kmeans_result <- kmeans(
+  clustering_scaled,
+  centers = 2,
+  nstart = 25
+)
+
+kmeans_diagnosis <- table(
+  Cluster = kmeans_result$cluster,
+  Diagnosis = metadata$Diagnosis
+)
+
+kmeans_diagnosis
+```
+
+Auch das k-means-Clustering ergab zwei Cluster mit 16 bzw. 56 Proben. Cluster 1 enthielt 10 ALL- und 6 AML-Proben, Cluster 2 enthielt 37 ALL- und 19 AML-Proben. Damit zeigte sich auch beim k-means-Clustering keine eindeutige Trennung von ALL und AML.
+
+Um zu überprüfen, ob beide Clusteringverfahren lediglich gleich große oder tatsächlich identische Cluster erzeugten, wurden die individuellen Clusterzuordnungen miteinander verglichen.
+
+```{r}
+table(
+  Hierarchical = hc_clusters,
+  Kmeans = kmeans_result$cluster
+)
+```
+
+Das hierarchische Clustering und das k-means-Clustering führten zu einer identischen Zuordnung aller 72 Proben. Beide Verfahren identifizierten somit dieselbe Struktur in den Expressionsdaten. Diese Gruppierung entsprach jedoch nicht der bekannten Einteilung in ALL und AML.
+
+### Sensitivitätsanalyse
+
+Um zu überprüfen, ob die Ergebnisse von der gewählten Datenvorverarbeitung abhängen, wurde das hierarchische Clustering zusätzlich mit unterschiedlichen Anteilen variabler Features sowie ohne Standardisierung durchgeführt.
+
+```{r}
+#| include: false
+
+# Clustering ohne Standardisierung
+dist_unscaled <- dist(clustering_variable, method = "euclidean")
+hc_unscaled <- hclust(dist_unscaled, method = "ward.D2")
+clusters_unscaled <- cutree(hc_unscaled, k = 2)
+
+# Funktion zum Test unterschiedlicher Feature-Anteile
+test_feature_fraction <- function(fraction) {
+  
+  cutoff <- quantile(feature_variance, 1 - fraction)
+  selected <- feature_variance >= cutoff
+  
+  mat <- clustering_matrix[, selected]
+  mat_scaled <- scale(mat)
+  
+  d <- dist(mat_scaled, method = "euclidean")
+  h <- hclust(d, method = "ward.D2")
+  
+  cutree(h, k = 2)
+}
+
+# Clustering mit unterschiedlichen Feature-Anteilen
+clusters_10 <- test_feature_fraction(0.10)
+clusters_25 <- test_feature_fraction(0.25)
+clusters_50 <- test_feature_fraction(0.50)
+
+# Clustering mit allen vollständigen Features
+all_scaled <- scale(clustering_matrix)
+all_dist <- dist(all_scaled, method = "euclidean")
+all_hc <- hclust(all_dist, method = "ward.D2")
+all_clusters <- cutree(all_hc, k = 2)
+
+```
+
+Das Clustering ohne Standardisierung führte zu einer identischen Zuordnung aller 72 Proben wie die standardisierte Analyse. Auch bei Verwendung der 10 %, 25 % und 50 % variabelsten Features waren die Clusterzuordnungen identisch. Bei Verwendung aller 7.059 vollständigen Features änderte sich die Zuordnung von vier der 72 Proben. Die fehlende Übereinstimmung der Cluster mit der ALL/AML-Diagnose blieb dabei bestehen. Die Ergebnisse erwiesen sich somit als robust gegenüber den untersuchten Varianten der Datenvorverarbeitung.
+
+### Fazit der Clusteranalyse
+
+Für die gewählte Feature-Auswahl identifizierten sowohl hierarchisches Clustering als auch k-means dieselbe Gruppierung der 72 Proben in zwei Cluster mit 16 bzw. 56 Proben. Sowohl das hierarchische Clustering mit euklidischer Distanz und Ward.D2 als auch das k-means-Clustering führten zu einer identischen Zuordnung der Proben. Die gefundene Clusterstruktur entsprach jedoch nicht der bekannten Einteilung in ALL und AML. Der Fisher-Exakt-Test zeigte keinen statistisch signifikanten Zusammenhang zwischen Clusterzugehörigkeit und Diagnose (p = 0,775). Auch die Heatmap der 50 variabelsten Features zeigte keine eindeutige Trennung der beiden Diagnosegruppen.
