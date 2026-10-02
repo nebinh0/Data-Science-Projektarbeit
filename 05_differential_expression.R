@@ -84,18 +84,6 @@ cat("===== ENDE NA-KONTROLLE =====\n")
 
 #cat("===== ENDE TEST =====\n")
 
-# 7.2 Prüfen, ob die Daten bereits standardisiert sind
-
-cat("\n===== STANDARDISIERUNGSCHECK =====\n")
-
-gene_means <- rowMeans(analysis_matrix_initial, na.rm = TRUE)
-gene_sds <- apply(analysis_matrix_initial, 1, sd, na.rm = TRUE)
-
-print(summary(gene_means))
-print(summary(gene_sds))
-
-cat("===== ENDE STANDARDISIERUNGSCHECK =====\n")
-
 # 8. Differential Expression mit limma
 
 library(limma)
@@ -143,6 +131,204 @@ print(top_genes)
 # 10. Differential-Expression-Plot
 
 library(ggplot2)
+
+# Signifikanz definieren
+results$significant <- results$adj.P.Val < 0.05
+
+# Differential-Expression-Plot
+de_plot <- ggplot(results,
+                  aes(x = logFC,
+                      y = -log10(P.Value),
+                      color = significant)) +
+  geom_point(alpha = 0.6, size = 1.5) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  labs(
+    title = "Differential Gene Expression: AML vs. ALL",
+    x = "Expression difference (AML vs. ALL)",
+    y = "-log10(p-value)",
+    color = "FDR < 0.05"
+  ) +
+  theme_minimal()
+
+print(de_plot)
+
+ggsave(
+  "differential_expression/differential_expression_plot.png",
+  de_plot,
+  width = 8,
+  height = 6,
+  dpi = 300
+)
+
+cat("\n===== DIFFERENTIAL EXPRESSION PLOT ERSTELLT =====\n")
+
+# 11. Heatmap der Top differentiell exprimierten Gene
+
+library(pheatmap)
+
+# Signifikante Gene auswählen
+sig_genes <- rownames(results)[results$adj.P.Val < 0.05]
+
+# Nur Gene ohne fehlende Werte verwenden
+sig_genes <- sig_genes[
+  sig_genes %in% colnames(analysis_matrix_initial)
+]
+
+sig_genes <- sig_genes[
+  !sapply(sig_genes, function(g)
+    anyNA(analysis_matrix_initial[, g])
+  )
+]
+
+# Nach korrigiertem p-Wert sortieren
+sig_genes <- sig_genes[
+  order(results[sig_genes, "adj.P.Val"])
+]
+
+# Top 20 Gene auswählen
+top20_genes <- head(sig_genes, 20)
+
+cat("\n===== TOP 20 GENE FÜR HEATMAP =====\n")
+print(top20_genes)
+
+# Expressionsmatrix erstellen
+heatmap_matrix <- t(
+  analysis_matrix_initial[, top20_genes, drop = FALSE]
+)
+
+# Annotation der Proben
+annotation_col <- data.frame(
+  Diagnose = metadata_initial$Diagnosis
+)
+
+rownames(annotation_col) <- rownames(metadata_initial)
+
+# Farben der Diagnose
+annotation_colors <- list(
+  Diagnose = c(
+    ALL = "salmon",
+    AML = "skyblue"
+  )
+)
+
+# Heatmap erstellen
+pheatmap(
+  heatmap_matrix,
+  scale = "row",
+  annotation_col = annotation_col,
+  annotation_colors = annotation_colors,
+  cluster_rows = TRUE,
+  cluster_cols = TRUE,
+  show_rownames = TRUE,
+  show_colnames = FALSE,
+  main = "Top 20 differentiell exprimierte Gene"
+)
+
+cat("\n===== HEATMAP ERSTELLT =====\n")
+
+library(pheatmap)
+
+# Signifikante Gene auswählen
+sig_genes <- rownames(results)[results$adj.P.Val < 0.05]
+
+# Nur Gene ohne fehlende Werte verwenden
+sig_genes <- sig_genes[
+  sig_genes %in% colnames(analysis_matrix_initial)
+]
+
+sig_genes <- sig_genes[
+  !sapply(sig_genes, function(g)
+    anyNA(analysis_matrix_initial[, g])
+  )
+]
+
+# Nach korrigiertem p-Wert sortieren
+sig_genes <- sig_genes[
+  order(results[sig_genes, "adj.P.Val"])
+]
+
+# Top 20 Gene auswählen
+top20_genes <- head(sig_genes, 20)
+
+cat("\n===== TOP 20 GENE FÜR HEATMAP =====\n")
+print(top20_genes)
+
+# Expressionsmatrix erstellen
+heatmap_matrix <- t(
+  analysis_matrix_initial[, top20_genes, drop = FALSE]
+)
+
+# Annotation der Proben nach Diagnose
+annotation_col <- data.frame(
+  Diagnose = metadata_initial$Diagnosis
+)
+
+rownames(annotation_col) <- rownames(metadata_initial)
+
+annotation_colors <- list(
+  Diagnose = c(
+    ALL = "salmon",
+    AML = "skyblue"
+  )
+)
+
+rownames(annotation_col) <- rownames(metadata_initial)
+
+# Heatmap erstellen
+heatmap_plot <- pheatmap(
+  heatmap_matrix,
+  scale = "row",
+  annotation_col = annotation_col,
+  annotation_colors = annotation_colors,
+  cluster_rows = TRUE,
+  cluster_cols = TRUE,
+  show_rownames = TRUE,
+  show_colnames = FALSE,
+  main = "Top 20 differentiell exprimierte Gene",
+  silent = TRUE
+)
+
+# Heatmap anzeigen
+grid::grid.newpage()
+grid::grid.draw(heatmap_plot$gtable)
+
+# Heatmap speichern
+png(
+  "differential_expression/heatmap_top20.png",
+  width = 8,
+  height = 7,
+  units = "in",
+  res = 300
+)
+
+grid::grid.draw(heatmap_plot$gtable)
+
+dev.off()
+
+library(ggplot2)
+
+# 12. Biologische Interpretation der Top-Gene
+
+cat("
+===== BIOLOGISCHE INTERPRETATION =====
+
+Unter den Top 20 differentiell exprimierten Genen befinden sich
+mehrere Gene, die bereits in früheren Analysen des Golub-
+Leukämiedatensatzes als relevante Merkmale für die Unterscheidung
+von ALL und AML beschrieben wurden.
+
+Dazu gehören unter anderem FTL (M11147_at), IL8/CXCL8
+(Y00787_s_at), MCL1 (L08246_at) und SQSTM1/p62 (U46751_at).
+
+Die Ergebnisse zeigen somit, dass sich ALL und AML in mehreren
+Genexpressionsmustern systematisch unterscheiden. Die Heatmap
+verdeutlicht zusätzlich, dass sich die Expressionsmuster der
+Top-Gene zwischen den untersuchten Proben unterscheiden.
+
+Die identifizierten Gene sollten dabei als statistisch relevante
+Expressionsmerkmale und nicht als einzelne diagnostische Marker
+interpretiert werden.
+")
 
 # Signifikanz definieren
 results$significant <- results$adj.P.Val < 0.05
