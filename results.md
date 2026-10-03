@@ -67,3 +67,65 @@ Unter den 20 am stärksten differentiell exprimierten Merkmalen befinden sich me
 Beispielsweise entspricht `L08246_at` dem Gen **MCL1 (myeloid cell leukemia 1)**. MCL1 ist an der Regulation des Zellüberlebens beteiligt. `M11147_at` entspricht **FTL (ferritin light chain)**, einem Bestandteil des Ferritin-Komplexes, der an der intrazellulären Eisenspeicherung beteiligt ist. `Y00787_s_at` entspricht **IL8/CXCL8 (Interleukin-8)**, einem Chemokin, das an Entzündungs- und Signalprozessen beteiligt ist. Auch `U46751_at`, das für das p62-Protein (SQSTM1) steht, wurde in früheren Analysen des Golub-Datensatzes als relevantes Expressionsmerkmal beschrieben.
 
 Die Übereinstimmung einzelner identifizierter Merkmale mit früheren Analysen des Golub-Datensatzes unterstützt die biologische Relevanz der gefundenen Expressionsunterschiede. Die Ergebnisse stellen jedoch keine Aussage darüber dar, dass einzelne Gene allein zur Diagnose von ALL oder AML ausreichen.
+
+
+# Clustering
+
+Ziel der Clusteranalyse war es zu untersuchen, ob sich anhand der Genexpressionsprofile ohne Verwendung der bekannten Diagnose natürliche Gruppen innerhalb der Proben identifizieren lassen und ob diese Gruppen mit den Diagnosen ALL und AML übereinstimmen.
+
+## Datenvorbereitung
+
+Für die Clusteranalyse wurde die zuvor bereinigte Expressionsmatrix verwendet. Features mit fehlenden Werten wurden ausgeschlossen, da die verwendeten Distanz- und Clusteringverfahren vollständige Daten voraussetzen. Anschließend wurden die 25 % der Features mit der höchsten Varianz ausgewählt. Dadurch sollten wenig variable Features, die nur wenig zur Unterscheidung der Proben beitragen, bei der Distanzberechnung weniger Einfluss erhalten. Die Feature-Auswahl erfolgte unabhängig von der bekannten Diagnose, um den unüberwachten Charakter der Clusteranalyse zu erhalten.
+
+Die ausgewählten Features wurden anschließend standardisiert. Dadurch besitzen die Features einen Mittelwert von 0 und eine Standardabweichung von 1, sodass Unterschiede in der Größenordnung der Expressionswerte die Distanzberechnung nicht dominieren.
+
+## Hierarchisches Clustering
+
+Für das hierarchische Clustering wurden euklidische Distanzen zwischen den Proben auf Grundlage der standardisierten Expressionswerte berechnet. Als Linkage-Methode wurde Ward.D2 verwendet. Dabei werden schrittweise diejenigen Cluster zusammengeführt, deren Zusammenführung zu einem möglichst geringen Anstieg der Streuung innerhalb der Cluster führt. Das resultierende Dendrogramm wurde anschließend in zwei Cluster unterteilt, um die erhaltene Gruppierung mit den beiden Diagnosen ALL und AML vergleichen zu können.
+
+![Hierarchisches Clustering der Proben](figures/clustering_dendrogram.png)
+
+*Abbildung 6: Dendrogramm des hierarchischen Clusterings der Proben anhand der Genexpressionsprofile.*
+
+## Vergleich mit der ALL/AML-Diagnose
+
+Das hierarchische Clustering ergab zwei unterschiedlich große Cluster. Cluster 1 umfasste 16 Proben und Cluster 2 umfasste 56 Proben. Um zu untersuchen, ob diese Gruppierung mit der bekannten Diagnose übereinstimmt, wurde die Verteilung der ALL- und AML-Proben auf die beiden Cluster betrachtet.
+
+Cluster 1 enthielt 10 ALL- und 6 AML-Proben, während Cluster 2 aus 37 ALL- und 19 AML-Proben bestand. Beide Diagnosen waren somit in beiden Clustern vertreten. Eine eindeutige Trennung der Proben nach ALL und AML war anhand der Clusterzugehörigkeit nicht erkennbar.
+
+Um zu prüfen, ob dennoch ein statistischer Zusammenhang zwischen Clusterzugehörigkeit und Diagnose bestand, wurde ein Fisher-Exakt-Test durchgeführt.
+
+Der Fisher-Exakt-Test ergab keinen statistisch signifikanten Zusammenhang zwischen Clusterzugehörigkeit und ALL/AML-Diagnose (p = 0,775). Die durch das hierarchische Clustering identifizierte Gruppierung entsprach somit nicht der bekannten diagnostischen Einteilung in ALL und AML.
+
+## Heatmap der Expressionsprofile
+
+Zur Visualisierung der Expressionsmuster wurden die 50 Features mit der höchsten Varianz dargestellt. Die Heatmap basiert auf den zuvor standardisierten Expressionswerten. Die Proben wurden in der Heatmap erneut anhand euklidischer Distanzen und Ward.D2 hierarchisch angeordnet. Zusätzlich wurde die bekannte ALL/AML-Diagnose der einzelnen Proben als Annotation dargestellt.
+
+![Heatmap der Expressionsprofile](figures/clustering_heatmap.png)
+
+*Abbildung 7: Heatmap der 50 variabelsten Features. Die Annotation zeigt die bekannte ALL/AML-Diagnose der Proben.*
+
+Die Heatmap zeigte deutliche Unterschiede in den Expressionsmustern zwischen einzelnen Probengruppen. Die ALL- und AML-Proben waren jedoch über die verschiedenen Äste des hierarchischen Clusterings verteilt und bildeten keine klar voneinander getrennten Gruppen. Damit unterstützt die Visualisierung das Ergebnis des vorherigen Vergleichs zwischen Clusterzugehörigkeit und Diagnose.
+
+Die Heatmap dient dabei primär der Visualisierung charakteristischer Expressionsmuster und basiert aus Gründen der Darstellbarkeit nur auf den 50 variabelsten Features, während das zuvor durchgeführte hierarchische Clustering auf den 25 % variabelsten Features basierte.
+
+## K-means-Clustering
+
+Ergänzend zum hierarchischen Clustering wurde ein k-means-Clustering mit zwei Clustern durchgeführt. Dadurch sollte untersucht werden, ob ein alternatives unüberwachtes Clusteringverfahren eine vergleichbare Gruppierung der Proben ergibt. Um den Einfluss der zufälligen Initialisierung zu reduzieren, wurden 25 verschiedene Startkonfigurationen verwendet. Für die Reproduzierbarkeit wurde zuvor ein fester Zufallsstart gesetzt.
+
+Auch das k-means-Clustering ergab zwei Cluster mit 16 bzw. 56 Proben. Cluster 1 enthielt 10 ALL- und 6 AML-Proben, Cluster 2 enthielt 37 ALL- und 19 AML-Proben. Damit zeigte sich auch beim k-means-Clustering keine eindeutige Trennung von ALL und AML.
+
+Um zu überprüfen, ob beide Clusteringverfahren lediglich gleich große oder tatsächlich identische Cluster erzeugten, wurden die individuellen Clusterzuordnungen miteinander verglichen.
+
+Das hierarchische Clustering und das k-means-Clustering führten zu einer identischen Zuordnung aller 72 Proben. Beide Verfahren identifizierten somit dieselbe Struktur in den Expressionsdaten. Diese Gruppierung entsprach jedoch nicht der bekannten Einteilung in ALL und AML.
+
+## Sensitivitätsanalyse
+
+Um zu überprüfen, ob die Ergebnisse von der gewählten Datenvorverarbeitung abhängen, wurde das hierarchische Clustering zusätzlich mit unterschiedlichen Anteilen variabler Features sowie ohne Standardisierung durchgeführt.
+
+Das Clustering ohne Standardisierung führte zu einer identischen Zuordnung aller 72 Proben wie die standardisierte Analyse. Auch bei Verwendung der 10 %, 25 % und 50 % variabelsten Features waren die Clusterzuordnungen identisch. Bei Verwendung aller 7.059 vollständigen Features änderte sich die Zuordnung von vier der 72 Proben. Die fehlende Übereinstimmung der Cluster mit der ALL/AML-Diagnose blieb dabei bestehen. Die Ergebnisse erwiesen sich somit als robust gegenüber den untersuchten Varianten der Datenvorverarbeitung.
+
+## Fazit der Clusteranalyse
+
+Für die gewählte Feature-Auswahl identifizierten sowohl hierarchisches Clustering als auch k-means dieselbe Gruppierung der 72 Proben in zwei Cluster mit 16 bzw. 56 Proben. Sowohl das hierarchische Clustering mit euklidischer Distanz und Ward.D2 als auch das k-means-Clustering führten zu einer identischen Zuordnung der Proben. Die gefundene Clusterstruktur entsprach jedoch nicht der bekannten Einteilung in ALL und AML. Der Fisher-Exakt-Test zeigte keinen statistisch signifikanten Zusammenhang zwischen Clusterzugehörigkeit und Diagnose (p = 0,775). Auch die Heatmap der 50 variabelsten Features zeigte keine eindeutige Trennung der beiden Diagnosegruppen.
+
