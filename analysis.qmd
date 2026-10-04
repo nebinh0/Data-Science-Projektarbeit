@@ -32,6 +32,113 @@ Ziel dieser Analyse ist es, die Genexpressionsdaten des Golub-Datensatzes zu unt
 
 # Ergebnisse
 
+## QA/QC und explorative Datenanalyse 
+
+Zu Beginn wurde die Qualität und Struktur der Expressionsdaten überprüft. Dazu wurden Dimensionen und die Struktur der Analyse-Matrix sowie die Metadaten betrachtet. Zusätzlich wurde überprüft, ob fehlende Werte in der Analyse-Matrix vorhanden sind. 
+
+```{r}
+# Struktur der Analyse-Matrix
+str(analysis_matrix)
+
+# Struktur der Metadaten
+str(metadata)
+
+# Anzahl fehlender Werte
+sum(is.na(analysis_matrix))
+
+# Fehlende Werte pro Gen
+colSums(is.na(analysis_matrix))
+
+# Nur Gene mit fehlenden Werten
+colSums(is.na(analysis_matrix))[colSums(is.na(analysis_matrix)) > 0]
+```
+
+### Verteilung der Expressionswerte 
+Anschließend wurde die Verteilung der Genexpressionswerte untersucht. Hierzu wurden deskriptive Kennwerte berechnet und die Expressionswerte in einem Histogramm dargestellt.
+
+```{r}
+summary(as.vector(analysis_matrix))
+
+hist(
+  as.vector(analysis_matrix),
+  breaks = 50,
+  main = "Verteilung der Genexpressionswerte",
+  xlab = "Expressionswert"
+)
+```
+### Verteilung der Expressionswerte pro Probe
+Um zu überprüfen, ob sich die einzelnen Proben hinsichtlich ihrer Expressionswerte deutlich von den übrigen Proben unterscheiden, wurden die Expressionswerte pro Probe als Boxplots dargestellt. 
+
+```{r}
+boxplot(
+  t(analysis_matrix),
+  las = 2,
+  outline = FALSE,
+  main = "Verteilung der Genexpressionswerte pro Probe",
+  xlab = "Probe",
+  ylab = "Expressionswert"
+)
+```
+### Mittlere Expressionswerte pro Probe
+Für die Identifikation von Proben mit besonders hohen/niedrigen mittleren Expressionswerten, wurden die Mittelwerte der Expressionswerte für jede Probe berechnet und verglichen. 
+
+```{r}
+sample_means <- colMeans(analysis_matrix, na.rm = TRUE)
+summary(sample_means)
+
+plot(
+  sample_means,
+  type = "h",
+  main = "Mittlere Expressionswerte pro Probe",
+  xlab = "Probe",
+  ylab = "Mittlerer Expressionswert"
+)
+```
+### Ähnlichkeit der Proben untereinander 
+Für die Untersuchung der Ähnlichkeit zwischen den Proben hinsichtlich ihres Genexpressionsprofils, wird die Korrelation zwischen den Proben berechnet. Die Ergebnisse wurden anschließend als Heatmap dargestellt. 
+
+```{r}
+sample_cor <- cor(
+  t(analysis_matrix),
+  use = "pairwise.complete.obs"
+)
+
+summary(as.vector(sample_cor))
+
+heatmap(
+  sample_cor,
+  main = "Korrelation zwischen den Proben",
+  xlab = "Probe",
+  ylab = "Probe"
+)
+```
+### Identifikation von Proben mit niedriger mittlerer Korrelation
+Um mögliche auffällige Proben zu identifizieren, wurde für jede Probe die mittlere Korrelation mit allen anderen probenm berechnet. Proben mit niedrigen mittleren Korrelationswerten weisen ein stärker abweichendes Genexpressionsprofil auf. 
+
+```{r}
+mean_cor <- rowMeans(sample_cor, na.rm = TRUE)
+names(mean_cor) <- rownames(analysis_matrix)
+
+sort(mean_cor)
+```
+### Korrelation der auffälligsten Probe mit übrigen Proben
+Anschließend wurden die Probe mit niedrigster mittlerer Korrelation genauer betrachtet und ihre Korrelation mit den übrigen Proben bestimmt 
+```{r}
+sort(sample_cor["39", ])
+```
+### Mittlere Korrelation ohne Selbstkorrelation
+Für die Bestimmung der mittleren Korrelation wurde anschließend die Selbskorrelation der jeweiligen Probe ausgeschlossen. 
+
+```{r}
+sample_cor_no_diag <- sample_cor
+diag(sample_cor_no_diag) <- NA
+
+mean_cor <- rowMeans(sample_cor_no_diag, na.rm = TRUE)
+names(mean_cor) <- rownames(analysis_matrix)
+
+sort(mean_cor)
+```
+
 ## Hauptkomponentenanalyse (PCA)
 
 Die erste Hauptkomponente (PC1) erklärte 20,58 % und die zweite Hauptkomponente (PC2) 12,26 % der Gesamtvarianz. Zusammen erklärten PC1 und PC2 somit 32,84 % der Varianz im Datensatz. Die Verteilung der erklärten Varianz ist in Abbildung 1 dargestellt.
