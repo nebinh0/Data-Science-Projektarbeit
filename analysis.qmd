@@ -43,20 +43,19 @@ str(analysis_matrix)
 # Struktur der Metadaten
 str(metadata)
 
-# Anzahl fehlender Werte
+# Fehlende Werte insgesamt
 sum(is.na(analysis_matrix))
 
-# Fehlende Werte pro Gen
-colSums(is.na(analysis_matrix))
-
-# Nur Gene mit fehlenden Werten
-colSums(is.na(analysis_matrix))[colSums(is.na(analysis_matrix)) > 0]
+# Anzahl der Gene mit mindestens einem fehlenden Wert
+sum(colSums(is.na(analysis_matrix)) > 0)
 ```
 
 ### Verteilung der Expressionswerte 
 Anschließend wurde die Verteilung der Genexpressionswerte untersucht. Hierzu wurden deskriptive Kennwerte berechnet und die Expressionswerte in einem Histogramm dargestellt.
 
 ```{r}
+#| label: fig-histogramm
+#| fig-cap: "Verteilung der Genexpressionswerte."
 summary(as.vector(analysis_matrix))
 
 hist(
@@ -66,10 +65,13 @@ hist(
   xlab = "Expressionswert"
 )
 ```
+
 ### Verteilung der Expressionswerte pro Probe
 Um zu überprüfen, ob sich die einzelnen Proben hinsichtlich ihrer Expressionswerte deutlich von den übrigen Proben unterscheiden, wurden die Expressionswerte pro Probe als Boxplots dargestellt. 
 
 ```{r}
+#| label: fig-boxplot
+#| fig-cap: "Verteilung der Expressionswerte pro Probe."
 boxplot(
   t(analysis_matrix),
   las = 2,
@@ -83,6 +85,8 @@ boxplot(
 Für die Identifikation von Proben mit besonders hohen/niedrigen mittleren Expressionswerten, wurden die Mittelwerte der Expressionswerte für jede Probe berechnet und verglichen. 
 
 ```{r}
+#| label: fig-mittelwerte
+#| fig-cap: "Mittlere Expressionswerte pro Probe."
 sample_means <- colMeans(analysis_matrix, na.rm = TRUE)
 summary(sample_means)
 
@@ -98,6 +102,8 @@ plot(
 Für die Untersuchung der Ähnlichkeit zwischen den Proben hinsichtlich ihres Genexpressionsprofils, wird die Korrelation zwischen den Proben berechnet. Die Ergebnisse wurden anschließend als Heatmap dargestellt. 
 
 ```{r}
+#| label: fig-heatmap-1
+#| fig-cap: "Korrelation zwischen den Proben als Heatmap."
 sample_cor <- cor(
   t(analysis_matrix),
   use = "pairwise.complete.obs"
@@ -188,7 +194,6 @@ clustering_scaled <- scale(clustering_variable)
 Für das hierarchische Clustering wurden euklidische Distanzen zwischen den Proben auf Grundlage der standardisierten Expressionswerte berechnet. Als Linkage-Methode wurde Ward.D2 verwendet. Dabei werden schrittweise diejenigen Cluster zusammengeführt, deren Zusammenführung zu einem möglichst geringen Anstieg der Streuung innerhalb der Cluster führt. Das resultierende Dendrogramm wurde anschließend in zwei Cluster unterteilt, um die erhaltene Gruppierung mit den beiden Diagnosen ALL und AML vergleichen zu können.
 
 ```{r}
-#| label: fig-hierarchical
 
 sample_dist <- dist(clustering_scaled, method = "euclidean")
 hc <- hclust(sample_dist, method = "ward.D2")
@@ -234,7 +239,7 @@ Der Fisher-Exakt-Test ergab keinen statistisch signifikanten Zusammenhang zwisch
 Zur Visualisierung der Expressionsmuster wurden die 50 Features mit der höchsten Varianz dargestellt. Die Heatmap basiert auf den zuvor standardisierten Expressionswerten. Die Proben wurden in der Heatmap erneut anhand euklidischer Distanzen und Ward.D2 hierarchisch angeordnet. Zusätzlich wurde die bekannte ALL/AML-Diagnose der einzelnen Proben als Annotation dargestellt.
 
 ```{r}
-#| label: fig-heatmap
+#| label: fig-heatmap-2
 #| fig-width: 10
 #| fig-height: 8
 
