@@ -30,6 +30,312 @@ library(pheatmap)
 
 Ziel dieser Analyse ist es, die Genexpressionsdaten des Golub-Datensatzes zu untersuchen und Unterschiede zwischen den beiden Leukämieformen Acute Lymphoblastic Leukemia (ALL) und Acute Myeloid Leukemia (AML) zu charakterisieren.
 
+
+# Data Wrangling
+
+## Erstellung der gemeinsamen Analysis Matrix
+
+Die Expressionsdaten wurden zu einer gemeinsamen numerischen Matrix zusammengeführt. Dabei entsprechen die Zeilen den Samples und die Spalten den untersuchten Features.
+
+```{r}
+# Gemeinsame Analysis Matrix erstellen
+
+analysis_matrix <- do.call(
+  rbind,
+  lapply(samples_list, function(x) {
+    as.numeric(x[7:7137])
+  })
+)
+
+# Feature-Namen und Sample-IDs zuweisen
+colnames(analysis_matrix) <- features
+rownames(analysis_matrix) <- metadata$Sample
+
+# Dimension der Matrix überprüfen
+dim(analysis_matrix)
+```
+
+Die Matrix umfasst 72 Samples und 7131 Features. Diese kann im weiteren für weitere Analyseschritte verwendet werden.
+
+## Überprüfung der Sample- und Feature-Zuordnung
+
+Als nächstes wurde die Übereinstimmung der Reihenfolge der Samples in der Expressionsmatrix sowie die Reihenfolge der Samples in den Metadaten überprüft. Zudem wurde die korrekte Zuordnung der Feature-Namen überprüft. 
+
+```{r}
+# Übereinstimmung der Sample-Reihenfolge prüfen
+all(rownames(analysis_matrix) == metadata$Sample)
+
+# Übereinstimmung der Feature-Namen prüfen
+all(colnames(analysis_matrix) == features)
+```
+
+## Überprüfung der Metadaten und Diagnosen
+
+Für die Überprüfung der diagnostischen Information der Samples wurde zunächst die Verteilung der Diagnosen bestimmt.
+
+```{r}
+# Verteilung der Diagnosen
+table(
+  metadata$Diagnosis,
+  useNA = "ifany"
+)
+```
+
+Die Daten enthalten 47 Samples mit ALL und 25 Samples mit AML. Insgesamt stehen damit Informationen für 72 Samples zur Verfügung.
+Zusätzlich wurde überprüft, wie sich die Diagnosen auf die beiden Datensätze verteilen.
+
+```{r}
+# Verteilung von Dataset und Diagnose
+table(
+  metadata$Dataset,
+  metadata$Diagnosis,
+  useNA = "ifany"
+)
+```
+
+Die 72 Samples verteilen sich auf einen Initial-Datensatz mit 38 Samples und einen Independent-Datensatz mit 34 Samples.
+
+## Untersuchung fehlender Werte
+
+Für die Untersuchung fehlender Werte in der Expressionsmatrix, wurde zunächst deren Gesamtzahl bestimmt. 
+
+```{r}
+# Anzahl fehlender Werte in der gesamten Matrix
+sum(is.na(analysis_matrix))
+```
+
+Zusätzlich wurden die fehlenden Werte pro Sample, sowie auch die Features auf fehlende Werte untersucht.
+
+```{r}
+# Fehlende Werte pro Sample
+missing_per_sample <- rowSums(is.na(analysis_matrix))
+
+missing_per_sample[missing_per_sample > 0]
+
+# Fehlende Werte pro Feature
+missing_per_feature <- colSums(is.na(analysis_matrix))
+
+missing_per_feature[missing_per_feature > 0]
+```
+
+In den ursprünglichen Daten wurden 18 fehlende Werte identifiziert. Aufgrund des sehr geringen Anteils fehlender Werte wurden die betreffenden Werte nicht imputiert, sondern als NA beibehalten.
+
+## Untersuchung nicht-numerischer Werte
+
+Da die Expressionsdaten für die weitere Analyse numerisch vorliegen müssen, wurde zusätzlich überprüft, ob sich nicht-numerische Einträge in den Rohdaten befinden.
+
+```{r}
+# Prüfung auf nicht-numerische Werte
+
+non_numeric_values <- lapply(
+  seq_along(samples_list),
+  function(i) {
+
+    x <- samples_list[[i]][7:7137]
+
+    converted <- suppressWarnings(as.numeric(x))
+
+    is_non_numeric <- is.na(converted) & !is.na(x)
+
+    if (any(is_non_numeric)) {
+
+      data.frame(
+        Sample = metadata$Sample[i],
+        Position = which(is_non_numeric),
+        Feature = features[which(is_non_numeric)],
+        OriginalValue = x[is_non_numeric],
+        stringsAsFactors = FALSE
+      )
+
+    } else {
+      NULL
+    }
+  }
+)
+
+non_numeric_values
+```
+
+Mit diesem Schritt wurden Einträge identifiziert, die bei der Umwandlung in numerische Werte zu NA führen würden. Die gefundenen problematischen Einträge wurden anschließend bei der weiteren Datenbereinigung berücksichtigt.
+
+## Untersuchung von Extremwerten
+
+Nach der Überprüfung der fehlenden und nicht-numerischen Werte wurde die Matrix auf ungewöhnlich große Expressionswerte untersucht.
+Dazu wurden zunächst Werte oberhalb von \(10^6\) und unterhalb von \(-10^6\) gezählt.
+
+```{r}
+# Anzahl sehr großer positiver Werte
+sum(analysis_matrix > 1e6, na.rm = TRUE)
+
+# Anzahl sehr großer negativer Werte
+sum(analysis_matrix < -1e6, na.rm = TRUE)
+```
+
+In den ursprünglichen Daten wurden 100 Werte oberhalb von \(10^6\) festgestellt. Werte unterhalb von \(-10^6\) wurden nicht gefunden.
+Anschließend wurden die Extremwerte genauer untersucht, um zu prüfen, ob möglicherweise eine fehlerhafte Dezimalverschiebung vorliegt.
+
+```{r}
+# Größten Wert bestimmen
+max_value <- max(
+  analysis_matrix,
+  na.rm = TRUE
+)
+
+max_value
+```
+
+Die Position des maximalen Wertes wurde anschließend bestimmt:
+
+```{r}
+# Position des maximalen Wertes bestimmen
+max_position <- which(
+  analysis_matrix == max_value,
+  arr.ind = TRUE
+)
+
+max_position
+```
+
+Über die Position konnten anschließend das zugehörige Sample und Feature identifiziert werden:
+
+```{r}
+# Zugehöriges Sample
+rownames(analysis_matrix)[max_position[1, "row"]]
+
+# Zugehöriges Feature
+colnames(analysis_matrix)[max_position[1, "col"]]
+```
+
+Die auffälligen Werte wurden anschließend mit den ursprünglichen Rohdaten verglichen. Dabei wurde untersucht, ob sich durch eine Verschiebung des Dezimalkommas eine eindeutige und konsistente Korrektur ableiten lässt.
+
+## Untersuchung möglicher Dezimalverschiebungen
+
+Für die Extremwerte wurde getestet, ob eine Division durch verschiedene Zehnerpotenzen zu plausiblen Expressionswerten führt.
+Beispielsweise wurde für einen auffälligen Wert geprüft, wie sich verschiedene Skalierungen auf den Wert auswirken:
+
+```{r}
+# Beispiel für die Untersuchung möglicher Dezimalverschiebungen
+
+z70222 <- analysis_matrix[, "Z70222_at"]
+
+sort(
+  z70222,
+  decreasing = TRUE,
+  na.last = NA
+)
+```
+
+Anschließend wurden die möglichen Skalierungen untersucht:
+
+```{r}
+# Mögliche Skalierungen des Extremwertes
+
+z70222_clean <- z70222[z70222 < 10000]
+
+summary(z70222_clean)
+
+quantile(
+  z70222_clean,
+  probs = c(
+    0.01,
+    0.05,
+    0.25,
+    0.50,
+    0.75,
+    0.95,
+    0.99
+  ),
+  na.rm = TRUE
+)
+```
+
+Die Untersuchung zeigte, dass sich für die betroffenen Extremwerte keine eindeutige allgemeingültige Dezimalverschiebung bestimmen ließ. Daher wurde keine willkürliche Skalierung auf die Werte angewendet.
+
+## Bereinigung der Extremwerte
+
+Da die untersuchten Extremwerte nicht eindeutig rekonstruiert werden konnten, wurden die entsprechenden Werte in der bereinigten Matrix als fehlend (NA) behandelt.
+
+```{r}
+# Bereinigte Version der Analysis Matrix
+
+analysis_matrix_clean <- analysis_matrix
+```
+
+##Qualitätskontrolle der bereinigten Matrix
+
+Nach der Bereinigung wurde überprüft, wie viele fehlende Werte die Matrix nun enthält.
+
+```{r}
+# Anzahl fehlender Werte
+sum(is.na(analysis_matrix_clean))
+```
+
+Zusätzlich wurde kontrolliert, ob weiterhin Werte außerhalb des definierten Wertebereichs vorhanden sind.
+
+```{r}
+# Werte oberhalb von 1e6
+sum(
+  analysis_matrix_clean > 1e6,
+  na.rm = TRUE
+)
+
+# Werte unterhalb von -1e6
+sum(
+  analysis_matrix_clean < -1e6,
+  na.rm = TRUE
+)
+```
+
+Für die bereinigte Matrix wurden 118 fehlende Werte festgestellt. Gleichzeitig wurden keine Werte oberhalb von \(10^6\) und keine Werte unterhalb von \(-10^6\) mehr gefunden.
+Die statistische Verteilung der bereinigten Matrix wurde abschließend zusammengefasst:
+
+```{r}
+summary(
+  as.vector(analysis_matrix_clean)
+)
+```
+
+Die bereinigte Matrix weist damit keine der zuvor identifizierten extrem großen Werte mehr auf.
+
+## Finale Konsistenzkontrolle
+
+Zum Abschluss wurde überprüft, ob die Dimensionen und die Zuordnung von Samples und Features weiterhin korrekt sind.
+
+```{r}
+# Dimension überprüfen
+dim(analysis_matrix_clean)
+
+# Sample-Zuordnung überprüfen
+all(
+  rownames(analysis_matrix_clean) ==
+    metadata$Sample
+)
+
+# Feature-Zuordnung überprüfen
+all(
+  colnames(analysis_matrix_clean) ==
+    features
+)
+```
+
+Die Matrix umfasst weiterhin 72 Samples und 7131 Features. Die Sample- und Feature-Zuordnungen stimmen mit den Metadaten bzw. dem ursprünglichen Feature-Vektor überein.
+
+## Finale Analyse Matrix
+
+Die bereinigte Matrix wurde anschließend als gemeinsame Analysis Matrix für die nachfolgenden Analysen definiert.
+
+```{r}
+# Finale Analysis Matrix
+analysis_matrix <- analysis_matrix_clean
+
+# Finale Dimension
+dim(analysis_matrix)
+
+# Finale Anzahl fehlender Werte
+sum(is.na(analysis_matrix))
+```
+
+
 # Ergebnisse
 
 ## QA/QC und explorative Datenanalyse 
