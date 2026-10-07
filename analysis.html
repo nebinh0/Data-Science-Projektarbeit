@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,7 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="analysis_files/libs/quarto-html/anchor.min.js"></script>
 <link href="analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="analysis_files/libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="analysis_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="analysis_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="analysis_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -93,39 +93,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#fragestellung" id="toc-fragestellung" class="nav-link" data-scroll-target="#fragestellung"><span class="header-section-number">1.1</span> Fragestellung</a></li>
   </ul></li>
-  <li><a href="#ergebnisse" id="toc-ergebnisse" class="nav-link" data-scroll-target="#ergebnisse"><span class="header-section-number">2</span> Ergebnisse</a>
+  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling"><span class="header-section-number">2</span> Data Wrangling</a>
   <ul class="collapse">
-  <li><a href="#qaqc-und-explorative-datenanalyse" id="toc-qaqc-und-explorative-datenanalyse" class="nav-link" data-scroll-target="#qaqc-und-explorative-datenanalyse"><span class="header-section-number">2.1</span> QA/QC und explorative Datenanalyse</a>
-  <ul class="collapse">
-  <li><a href="#verteilung-der-expressionswerte" id="toc-verteilung-der-expressionswerte" class="nav-link" data-scroll-target="#verteilung-der-expressionswerte"><span class="header-section-number">2.1.1</span> Verteilung der Expressionswerte</a></li>
-  <li><a href="#verteilung-der-expressionswerte-pro-probe" id="toc-verteilung-der-expressionswerte-pro-probe" class="nav-link" data-scroll-target="#verteilung-der-expressionswerte-pro-probe"><span class="header-section-number">2.1.2</span> Verteilung der Expressionswerte pro Probe</a></li>
-  <li><a href="#mittlere-expressionswerte-pro-probe" id="toc-mittlere-expressionswerte-pro-probe" class="nav-link" data-scroll-target="#mittlere-expressionswerte-pro-probe"><span class="header-section-number">2.1.3</span> Mittlere Expressionswerte pro Probe</a></li>
-  <li><a href="#ähnlichkeit-der-proben-untereinander" id="toc-ähnlichkeit-der-proben-untereinander" class="nav-link" data-scroll-target="#ähnlichkeit-der-proben-untereinander"><span class="header-section-number">2.1.4</span> Ähnlichkeit der Proben untereinander</a></li>
-  <li><a href="#identifikation-von-proben-mit-niedriger-mittlerer-korrelation" id="toc-identifikation-von-proben-mit-niedriger-mittlerer-korrelation" class="nav-link" data-scroll-target="#identifikation-von-proben-mit-niedriger-mittlerer-korrelation"><span class="header-section-number">2.1.5</span> Identifikation von Proben mit niedriger mittlerer Korrelation</a></li>
-  <li><a href="#korrelation-der-auffälligsten-probe-mit-übrigen-proben" id="toc-korrelation-der-auffälligsten-probe-mit-übrigen-proben" class="nav-link" data-scroll-target="#korrelation-der-auffälligsten-probe-mit-übrigen-proben"><span class="header-section-number">2.1.6</span> Korrelation der auffälligsten Probe mit übrigen Proben</a></li>
-  <li><a href="#mittlere-korrelation-ohne-selbstkorrelation" id="toc-mittlere-korrelation-ohne-selbstkorrelation" class="nav-link" data-scroll-target="#mittlere-korrelation-ohne-selbstkorrelation"><span class="header-section-number">2.1.7</span> Mittlere Korrelation ohne Selbstkorrelation</a></li>
+  <li><a href="#erstellung-der-gemeinsamen-analysis-matrix" id="toc-erstellung-der-gemeinsamen-analysis-matrix" class="nav-link" data-scroll-target="#erstellung-der-gemeinsamen-analysis-matrix"><span class="header-section-number">2.1</span> Erstellung der gemeinsamen Analysis Matrix</a></li>
+  <li><a href="#überprüfung-der-sample--und-feature-zuordnung" id="toc-überprüfung-der-sample--und-feature-zuordnung" class="nav-link" data-scroll-target="#überprüfung-der-sample--und-feature-zuordnung"><span class="header-section-number">2.2</span> Überprüfung der Sample- und Feature-Zuordnung</a></li>
+  <li><a href="#überprüfung-der-metadaten-und-diagnosen" id="toc-überprüfung-der-metadaten-und-diagnosen" class="nav-link" data-scroll-target="#überprüfung-der-metadaten-und-diagnosen"><span class="header-section-number">2.3</span> Überprüfung der Metadaten und Diagnosen</a></li>
+  <li><a href="#untersuchung-fehlender-werte" id="toc-untersuchung-fehlender-werte" class="nav-link" data-scroll-target="#untersuchung-fehlender-werte"><span class="header-section-number">2.4</span> Untersuchung fehlender Werte</a></li>
+  <li><a href="#untersuchung-nicht-numerischer-werte" id="toc-untersuchung-nicht-numerischer-werte" class="nav-link" data-scroll-target="#untersuchung-nicht-numerischer-werte"><span class="header-section-number">2.5</span> Untersuchung nicht-numerischer Werte</a></li>
+  <li><a href="#untersuchung-von-extremwerten" id="toc-untersuchung-von-extremwerten" class="nav-link" data-scroll-target="#untersuchung-von-extremwerten"><span class="header-section-number">2.6</span> Untersuchung von Extremwerten</a></li>
+  <li><a href="#untersuchung-möglicher-dezimalverschiebungen" id="toc-untersuchung-möglicher-dezimalverschiebungen" class="nav-link" data-scroll-target="#untersuchung-möglicher-dezimalverschiebungen"><span class="header-section-number">2.7</span> Untersuchung möglicher Dezimalverschiebungen</a></li>
+  <li><a href="#bereinigung-der-extremwerte" id="toc-bereinigung-der-extremwerte" class="nav-link" data-scroll-target="#bereinigung-der-extremwerte"><span class="header-section-number">2.8</span> Bereinigung der Extremwerte</a></li>
+  <li><a href="#finale-konsistenzkontrolle" id="toc-finale-konsistenzkontrolle" class="nav-link" data-scroll-target="#finale-konsistenzkontrolle"><span class="header-section-number">2.9</span> Finale Konsistenzkontrolle</a></li>
+  <li><a href="#finale-analyse-matrix" id="toc-finale-analyse-matrix" class="nav-link" data-scroll-target="#finale-analyse-matrix"><span class="header-section-number">2.10</span> Finale Analyse Matrix</a></li>
   </ul></li>
-  <li><a href="#hauptkomponentenanalyse-pca" id="toc-hauptkomponentenanalyse-pca" class="nav-link" data-scroll-target="#hauptkomponentenanalyse-pca"><span class="header-section-number">2.2</span> Hauptkomponentenanalyse (PCA)</a></li>
-  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">2.3</span> Clustering</a>
+  <li><a href="#ergebnisse" id="toc-ergebnisse" class="nav-link" data-scroll-target="#ergebnisse"><span class="header-section-number">3</span> Ergebnisse</a>
   <ul class="collapse">
-  <li><a href="#fragestellung-1" id="toc-fragestellung-1" class="nav-link" data-scroll-target="#fragestellung-1"><span class="header-section-number">2.3.1</span> Fragestellung</a></li>
-  <li><a href="#datenvorbereitung" id="toc-datenvorbereitung" class="nav-link" data-scroll-target="#datenvorbereitung"><span class="header-section-number">2.3.2</span> Datenvorbereitung</a></li>
-  <li><a href="#hierarchisches-clustering" id="toc-hierarchisches-clustering" class="nav-link" data-scroll-target="#hierarchisches-clustering"><span class="header-section-number">2.3.3</span> Hierarchisches Clustering</a></li>
-  <li><a href="#vergleich-mit-der-allaml-diagnose" id="toc-vergleich-mit-der-allaml-diagnose" class="nav-link" data-scroll-target="#vergleich-mit-der-allaml-diagnose"><span class="header-section-number">2.3.4</span> Vergleich mit der ALL/AML-Diagnose</a></li>
-  <li><a href="#heatmap-der-expressionsprofile" id="toc-heatmap-der-expressionsprofile" class="nav-link" data-scroll-target="#heatmap-der-expressionsprofile"><span class="header-section-number">2.3.5</span> Heatmap der Expressionsprofile</a></li>
-  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering"><span class="header-section-number">2.3.6</span> K-means-Clustering</a></li>
-  <li><a href="#sensitivitätsanalyse" id="toc-sensitivitätsanalyse" class="nav-link" data-scroll-target="#sensitivitätsanalyse"><span class="header-section-number">2.3.7</span> Sensitivitätsanalyse</a></li>
-  <li><a href="#fazit-der-clusteranalyse" id="toc-fazit-der-clusteranalyse" class="nav-link" data-scroll-target="#fazit-der-clusteranalyse"><span class="header-section-number">2.3.8</span> Fazit der Clusteranalyse</a></li>
+  <li><a href="#qaqc-und-explorative-datenanalyse" id="toc-qaqc-und-explorative-datenanalyse" class="nav-link" data-scroll-target="#qaqc-und-explorative-datenanalyse"><span class="header-section-number">3.1</span> QA/QC und explorative Datenanalyse</a>
+  <ul class="collapse">
+  <li><a href="#verteilung-der-expressionswerte" id="toc-verteilung-der-expressionswerte" class="nav-link" data-scroll-target="#verteilung-der-expressionswerte"><span class="header-section-number">3.1.1</span> Verteilung der Expressionswerte</a></li>
+  <li><a href="#verteilung-der-expressionswerte-pro-probe" id="toc-verteilung-der-expressionswerte-pro-probe" class="nav-link" data-scroll-target="#verteilung-der-expressionswerte-pro-probe"><span class="header-section-number">3.1.2</span> Verteilung der Expressionswerte pro Probe</a></li>
+  <li><a href="#mittlere-expressionswerte-pro-probe" id="toc-mittlere-expressionswerte-pro-probe" class="nav-link" data-scroll-target="#mittlere-expressionswerte-pro-probe"><span class="header-section-number">3.1.3</span> Mittlere Expressionswerte pro Probe</a></li>
+  <li><a href="#ähnlichkeit-der-proben-untereinander" id="toc-ähnlichkeit-der-proben-untereinander" class="nav-link" data-scroll-target="#ähnlichkeit-der-proben-untereinander"><span class="header-section-number">3.1.4</span> Ähnlichkeit der Proben untereinander</a></li>
+  <li><a href="#identifikation-von-proben-mit-niedriger-mittlerer-korrelation" id="toc-identifikation-von-proben-mit-niedriger-mittlerer-korrelation" class="nav-link" data-scroll-target="#identifikation-von-proben-mit-niedriger-mittlerer-korrelation"><span class="header-section-number">3.1.5</span> Identifikation von Proben mit niedriger mittlerer Korrelation</a></li>
+  <li><a href="#korrelation-der-auffälligsten-probe-mit-übrigen-proben" id="toc-korrelation-der-auffälligsten-probe-mit-übrigen-proben" class="nav-link" data-scroll-target="#korrelation-der-auffälligsten-probe-mit-übrigen-proben"><span class="header-section-number">3.1.6</span> Korrelation der auffälligsten Probe mit übrigen Proben</a></li>
+  <li><a href="#mittlere-korrelation-ohne-selbstkorrelation" id="toc-mittlere-korrelation-ohne-selbstkorrelation" class="nav-link" data-scroll-target="#mittlere-korrelation-ohne-selbstkorrelation"><span class="header-section-number">3.1.7</span> Mittlere Korrelation ohne Selbstkorrelation</a></li>
   </ul></li>
-  <li><a href="#differentielle-genexpression" id="toc-differentielle-genexpression" class="nav-link" data-scroll-target="#differentielle-genexpression"><span class="header-section-number">2.4</span> Differentielle Genexpression</a>
+  <li><a href="#hauptkomponentenanalyse-pca" id="toc-hauptkomponentenanalyse-pca" class="nav-link" data-scroll-target="#hauptkomponentenanalyse-pca"><span class="header-section-number">3.2</span> Hauptkomponentenanalyse (PCA)</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">3.3</span> Clustering</a>
   <ul class="collapse">
-  <li><a href="#fragestellung-2" id="toc-fragestellung-2" class="nav-link" data-scroll-target="#fragestellung-2"><span class="header-section-number">2.4.1</span> Fragestellung</a></li>
-  <li><a href="#analyse" id="toc-analyse" class="nav-link" data-scroll-target="#analyse"><span class="header-section-number">2.4.2</span> Analyse</a></li>
-  <li><a href="#ergebnisse-1" id="toc-ergebnisse-1" class="nav-link" data-scroll-target="#ergebnisse-1"><span class="header-section-number">2.4.3</span> Ergebnisse</a></li>
-  <li><a href="#heatmap-der-top-20-expressionsmerkmale" id="toc-heatmap-der-top-20-expressionsmerkmale" class="nav-link" data-scroll-target="#heatmap-der-top-20-expressionsmerkmale"><span class="header-section-number">2.4.4</span> Heatmap der Top-20-Expressionsmerkmale</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">2.4.5</span> Interpretation</a></li>
-  <li><a href="#biologische-einordnung-ausgewählter-merkmale" id="toc-biologische-einordnung-ausgewählter-merkmale" class="nav-link" data-scroll-target="#biologische-einordnung-ausgewählter-merkmale"><span class="header-section-number">2.4.6</span> Biologische Einordnung ausgewählter Merkmale</a></li>
-  <li><a href="#limitationen" id="toc-limitationen" class="nav-link" data-scroll-target="#limitationen"><span class="header-section-number">2.4.7</span> Limitationen</a></li>
+  <li><a href="#fragestellung-1" id="toc-fragestellung-1" class="nav-link" data-scroll-target="#fragestellung-1"><span class="header-section-number">3.3.1</span> Fragestellung</a></li>
+  <li><a href="#datenvorbereitung" id="toc-datenvorbereitung" class="nav-link" data-scroll-target="#datenvorbereitung"><span class="header-section-number">3.3.2</span> Datenvorbereitung</a></li>
+  <li><a href="#hierarchisches-clustering" id="toc-hierarchisches-clustering" class="nav-link" data-scroll-target="#hierarchisches-clustering"><span class="header-section-number">3.3.3</span> Hierarchisches Clustering</a></li>
+  <li><a href="#vergleich-mit-der-allaml-diagnose" id="toc-vergleich-mit-der-allaml-diagnose" class="nav-link" data-scroll-target="#vergleich-mit-der-allaml-diagnose"><span class="header-section-number">3.3.4</span> Vergleich mit der ALL/AML-Diagnose</a></li>
+  <li><a href="#heatmap-der-expressionsprofile" id="toc-heatmap-der-expressionsprofile" class="nav-link" data-scroll-target="#heatmap-der-expressionsprofile"><span class="header-section-number">3.3.5</span> Heatmap der Expressionsprofile</a></li>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering"><span class="header-section-number">3.3.6</span> K-means-Clustering</a></li>
+  <li><a href="#sensitivitätsanalyse" id="toc-sensitivitätsanalyse" class="nav-link" data-scroll-target="#sensitivitätsanalyse"><span class="header-section-number">3.3.7</span> Sensitivitätsanalyse</a></li>
+  <li><a href="#fazit-der-clusteranalyse" id="toc-fazit-der-clusteranalyse" class="nav-link" data-scroll-target="#fazit-der-clusteranalyse"><span class="header-section-number">3.3.8</span> Fazit der Clusteranalyse</a></li>
+  </ul></li>
+  <li><a href="#differentielle-genexpression" id="toc-differentielle-genexpression" class="nav-link" data-scroll-target="#differentielle-genexpression"><span class="header-section-number">3.4</span> Differentielle Genexpression</a>
+  <ul class="collapse">
+  <li><a href="#fragestellung-2" id="toc-fragestellung-2" class="nav-link" data-scroll-target="#fragestellung-2"><span class="header-section-number">3.4.1</span> Fragestellung</a></li>
+  <li><a href="#analyse" id="toc-analyse" class="nav-link" data-scroll-target="#analyse"><span class="header-section-number">3.4.2</span> Analyse</a></li>
+  <li><a href="#ergebnisse-1" id="toc-ergebnisse-1" class="nav-link" data-scroll-target="#ergebnisse-1"><span class="header-section-number">3.4.3</span> Ergebnisse</a></li>
+  <li><a href="#heatmap-der-top-20-expressionsmerkmale" id="toc-heatmap-der-top-20-expressionsmerkmale" class="nav-link" data-scroll-target="#heatmap-der-top-20-expressionsmerkmale"><span class="header-section-number">3.4.4</span> Heatmap der Top-20-Expressionsmerkmale</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">3.4.5</span> Interpretation</a></li>
+  <li><a href="#biologische-einordnung-ausgewählter-merkmale" id="toc-biologische-einordnung-ausgewählter-merkmale" class="nav-link" data-scroll-target="#biologische-einordnung-ausgewählter-merkmale"><span class="header-section-number">3.4.6</span> Biologische Einordnung ausgewählter Merkmale</a></li>
+  <li><a href="#limitationen" id="toc-limitationen" class="nav-link" data-scroll-target="#limitationen"><span class="header-section-number">3.4.7</span> Limitationen</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -169,22 +182,637 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Ziel dieser Analyse ist es, die Genexpressionsdaten des Golub-Datensatzes zu untersuchen und Unterschiede zwischen den beiden Leukämieformen Acute Lymphoblastic Leukemia (ALL) und Acute Myeloid Leukemia (AML) zu charakterisieren.</p>
 </section>
 </section>
-<section id="ergebnisse" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Ergebnisse</h1>
-<section id="qaqc-und-explorative-datenanalyse" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="qaqc-und-explorative-datenanalyse"><span class="header-section-number">2.1</span> QA/QC und explorative Datenanalyse</h2>
+<section id="data-wrangling" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Data Wrangling</h1>
+<section id="erstellung-der-gemeinsamen-analysis-matrix" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="erstellung-der-gemeinsamen-analysis-matrix"><span class="header-section-number">2.1</span> Erstellung der gemeinsamen Analysis Matrix</h2>
+<p>Die Expressionsdaten wurden zu einer gemeinsamen numerischen Matrix zusammengeführt. Dabei entsprechen die Zeilen den Samples und die Spalten den untersuchten Features.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gemeinsame Analysis Matrix erstellen</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>analysis_matrix <span class="ot">&lt;-</span> <span class="fu">do.call</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  rbind,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(samples_list, <span class="cf">function</span>(x) {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.numeric</span>(x[<span class="dv">7</span><span class="sc">:</span><span class="dv">7137</span>])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature-Namen und Sample-IDs zuweisen</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(analysis_matrix) <span class="ot">&lt;-</span> features</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(analysis_matrix) <span class="ot">&lt;-</span> metadata<span class="sc">$</span>Sample</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Dimension der Matrix überprüfen</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(analysis_matrix)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   72 7131</code></pre>
+</div>
+</div>
+<p>Die Matrix umfasst 72 Samples und 7131 Features. Diese kann im weiteren für weitere Analyseschritte verwendet werden.</p>
+</section>
+<section id="überprüfung-der-sample--und-feature-zuordnung" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="überprüfung-der-sample--und-feature-zuordnung"><span class="header-section-number">2.2</span> Überprüfung der Sample- und Feature-Zuordnung</h2>
+<p>Als nächstes wurde die Übereinstimmung der Reihenfolge der Samples in der Expressionsmatrix sowie die Reihenfolge der Samples in den Metadaten überprüft. Zudem wurde die korrekte Zuordnung der Feature-Namen überprüft.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Übereinstimmung der Sample-Reihenfolge prüfen</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">rownames</span>(analysis_matrix) <span class="sc">==</span> metadata<span class="sc">$</span>Sample)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Übereinstimmung der Feature-Namen prüfen</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">colnames</span>(analysis_matrix) <span class="sc">==</span> features)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="überprüfung-der-metadaten-und-diagnosen" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="überprüfung-der-metadaten-und-diagnosen"><span class="header-section-number">2.3</span> Überprüfung der Metadaten und Diagnosen</h2>
+<p>Für die Überprüfung der diagnostischen Information der Samples wurde zunächst die Verteilung der Diagnosen bestimmt.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verteilung der Diagnosen</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  metadata<span class="sc">$</span>Diagnosis,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">useNA =</span> <span class="st">"ifany"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ALL AML 
+ 47  25 </code></pre>
+</div>
+</div>
+<p>Die Daten enthalten 47 Samples mit ALL und 25 Samples mit AML. Insgesamt stehen damit Informationen für 72 Samples zur Verfügung. Zusätzlich wurde überprüft, wie sich die Diagnosen auf die beiden Datensätze verteilen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verteilung von Dataset und Diagnose</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  metadata<span class="sc">$</span>Dataset,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  metadata<span class="sc">$</span>Diagnosis,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">useNA =</span> <span class="st">"ifany"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             
+              ALL AML
+  independent  20  14
+  initial      27  11</code></pre>
+</div>
+</div>
+<p>Die 72 Samples verteilen sich auf einen Initial-Datensatz mit 38 Samples und einen Independent-Datensatz mit 34 Samples.</p>
+</section>
+<section id="untersuchung-fehlender-werte" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="untersuchung-fehlender-werte"><span class="header-section-number">2.4</span> Untersuchung fehlender Werte</h2>
+<p>Für die Untersuchung fehlender Werte in der Expressionsmatrix, wurde zunächst deren Gesamtzahl bestimmt.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzahl fehlender Werte in der gesamten Matrix</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(analysis_matrix))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18</code></pre>
+</div>
+</div>
+<p>Zusätzlich wurden die fehlenden Werte pro Sample, sowie auch die Features auf fehlende Werte untersucht.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fehlende Werte pro Sample</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>missing_per_sample <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">is.na</span>(analysis_matrix))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>missing_per_sample[missing_per_sample <span class="sc">&gt;</span> <span class="dv">0</span>]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>70 72 67 55 59 52 51 64  5  9 13 25 26 27 37 29 
+ 2  1  1  1  1  1  1  1  1  1  1  1  1  1  2  1 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fehlende Werte pro Feature</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>missing_per_feature <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">is.na</span>(analysis_matrix))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>missing_per_feature[missing_per_feature <span class="sc">&gt;</span> <span class="dv">0</span>]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     M14565_at      M14636_at      M14660_at      U58096_at      U58130_at 
+             1              1              1              1              1 
+     U59748_at      Z49205_at      Z49878_at      Z50194_at      Z50781_at 
+             1              1              1              1              1 
+Z68129_cds1_at      Z69720_at      Z83806_at      U25975_at      U44103_at 
+             1              1              1              1              1 
+     U44105_at      X00949_at 
+             1              2 </code></pre>
+</div>
+</div>
+<p>In den ursprünglichen Daten wurden 18 fehlende Werte identifiziert. Aufgrund des sehr geringen Anteils fehlender Werte wurden die betreffenden Werte nicht imputiert, sondern als NA beibehalten.</p>
+</section>
+<section id="untersuchung-nicht-numerischer-werte" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="untersuchung-nicht-numerischer-werte"><span class="header-section-number">2.5</span> Untersuchung nicht-numerischer Werte</h2>
+<p>Da die Expressionsdaten für die weitere Analyse numerisch vorliegen müssen, wurde zusätzlich überprüft, ob sich nicht-numerische Einträge in den Rohdaten befinden.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prüfung auf nicht-numerische Werte</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>non_numeric_values <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seq_along</span>(samples_list),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(i) {</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> samples_list[[i]][<span class="dv">7</span><span class="sc">:</span><span class="dv">7137</span>]</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    converted <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(x))</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    is_non_numeric <span class="ot">&lt;-</span> <span class="fu">is.na</span>(converted) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(x)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">any</span>(is_non_numeric)) {</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">Sample =</span> metadata<span class="sc">$</span>Sample[i],</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">Position =</span> <span class="fu">which</span>(is_non_numeric),</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">Feature =</span> features[<span class="fu">which</span>(is_non_numeric)],</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">OriginalValue =</span> x[is_non_numeric],</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>      <span class="cn">NULL</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>non_numeric_values</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+NULL
+
+[[2]]
+NULL
+
+[[3]]
+NULL
+
+[[4]]
+NULL
+
+[[5]]
+NULL
+
+[[6]]
+NULL
+
+[[7]]
+NULL
+
+[[8]]
+NULL
+
+[[9]]
+NULL
+
+[[10]]
+NULL
+
+[[11]]
+NULL
+
+[[12]]
+  Sample Position   Feature OriginalValue
+1     70     3447 U58130_at             -
+2     70     5173 Z49205_at             -
+
+[[13]]
+NULL
+
+[[14]]
+  Sample Position   Feature OriginalValue
+1     72     1725 M14636_at             -
+
+[[15]]
+NULL
+
+[[16]]
+NULL
+
+[[17]]
+  Sample Position   Feature OriginalValue
+1     67     6916 X00949_at             -
+
+[[18]]
+  Sample Position   Feature OriginalValue
+1     55     6903 U44105_at             -
+
+[[19]]
+NULL
+
+[[20]]
+  Sample Position   Feature OriginalValue
+1     59     6896 U25975_at             -
+
+[[21]]
+  Sample Position        Feature OriginalValue
+1     52     5188 Z68129_cds1_at             -
+
+[[22]]
+NULL
+
+[[23]]
+  Sample Position   Feature OriginalValue
+1     51     5191 Z69720_at              
+
+[[24]]
+NULL
+
+[[25]]
+NULL
+
+[[26]]
+NULL
+
+[[27]]
+NULL
+
+[[28]]
+NULL
+
+[[29]]
+NULL
+
+[[30]]
+NULL
+
+[[31]]
+NULL
+
+[[32]]
+NULL
+
+[[33]]
+  Sample Position   Feature OriginalValue
+1     64     3467 U59748_at             -
+
+[[34]]
+NULL
+
+[[35]]
+NULL
+
+[[36]]
+NULL
+
+[[37]]
+NULL
+
+[[38]]
+NULL
+
+[[39]]
+  Sample Position   Feature OriginalValue
+1      5     5225 Z83806_at              
+
+[[40]]
+NULL
+
+[[41]]
+NULL
+
+[[42]]
+NULL
+
+[[43]]
+  Sample Position   Feature OriginalValue
+1      9     3446 U58096_at             -
+
+[[44]]
+NULL
+
+[[45]]
+NULL
+
+[[46]]
+NULL
+
+[[47]]
+  Sample Position   Feature OriginalValue
+1     13     5177 Z49878_at             -
+
+[[48]]
+NULL
+
+[[49]]
+NULL
+
+[[50]]
+NULL
+
+[[51]]
+NULL
+
+[[52]]
+NULL
+
+[[53]]
+NULL
+
+[[54]]
+NULL
+
+[[55]]
+NULL
+
+[[56]]
+NULL
+
+[[57]]
+NULL
+
+[[58]]
+NULL
+
+[[59]]
+  Sample Position   Feature OriginalValue
+1     25     1724 M14565_at              
+
+[[60]]
+  Sample Position   Feature OriginalValue
+1     26     5184 Z50781_at              
+
+[[61]]
+  Sample Position   Feature OriginalValue
+1     27     6916 X00949_at             -
+
+[[62]]
+NULL
+
+[[63]]
+NULL
+
+[[64]]
+NULL
+
+[[65]]
+  Sample Position   Feature OriginalValue
+1     37     1727 M14660_at              
+2     37     5182 Z50194_at             -
+
+[[66]]
+NULL
+
+[[67]]
+NULL
+
+[[68]]
+  Sample Position   Feature OriginalValue
+1     29     6902 U44103_at             -
+
+[[69]]
+NULL
+
+[[70]]
+NULL
+
+[[71]]
+NULL
+
+[[72]]
+NULL</code></pre>
+</div>
+</div>
+<p>Mit diesem Schritt wurden Einträge identifiziert, die bei der Umwandlung in numerische Werte zu NA führen würden. Die gefundenen problematischen Einträge wurden anschließend bei der weiteren Datenbereinigung berücksichtigt.</p>
+</section>
+<section id="untersuchung-von-extremwerten" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="untersuchung-von-extremwerten"><span class="header-section-number">2.6</span> Untersuchung von Extremwerten</h2>
+<p>Nach der Überprüfung der fehlenden und nicht-numerischen Werte wurde die Matrix auf ungewöhnlich große Expressionswerte untersucht. Dazu wurden zunächst Werte oberhalb von (10^6) und unterhalb von (-10^6) gezählt.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzahl sehr großer positiver Werte</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(analysis_matrix <span class="sc">&gt;</span> <span class="fl">1e6</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzahl sehr großer negativer Werte</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(analysis_matrix <span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">1e6</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>In den ursprünglichen Daten wurden 100 Werte oberhalb von (10^6) festgestellt. Werte unterhalb von (-10^6) wurden nicht gefunden. Anschließend wurden die Extremwerte genauer untersucht, um zu prüfen, ob möglicherweise eine fehlerhafte Dezimalverschiebung vorliegt.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Größten Wert bestimmen</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>max_value <span class="ot">&lt;-</span> <span class="fu">max</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  analysis_matrix,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>max_value</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.598543e+13</code></pre>
+</div>
+</div>
+<p>Die Position des maximalen Wertes wurde anschließend bestimmt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Position des maximalen Wertes bestimmen</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>max_position <span class="ot">&lt;-</span> <span class="fu">which</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  analysis_matrix <span class="sc">==</span> max_value,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">arr.ind =</span> <span class="cn">TRUE</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>max_position</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   row  col
+35  63 5197</code></pre>
+</div>
+</div>
+<p>Über die Position konnten anschließend das zugehörige Sample und Feature identifiziert werden:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Zugehöriges Sample</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(analysis_matrix)[max_position[<span class="dv">1</span>, <span class="st">"row"</span>]]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "35"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Zugehöriges Feature</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(analysis_matrix)[max_position[<span class="dv">1</span>, <span class="st">"col"</span>]]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Z70222_at"</code></pre>
+</div>
+</div>
+<p>Die auffälligen Werte wurden anschließend mit den ursprünglichen Rohdaten verglichen. Dabei wurde untersucht, ob sich durch eine Verschiebung des Dezimalkommas eine eindeutige und konsistente Korrektur ableiten lässt.</p>
+</section>
+<section id="untersuchung-möglicher-dezimalverschiebungen" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="untersuchung-möglicher-dezimalverschiebungen"><span class="header-section-number">2.7</span> Untersuchung möglicher Dezimalverschiebungen</h2>
+<p>Für die Extremwerte wurde getestet, ob eine Division durch verschiedene Zehnerpotenzen zu plausiblen Expressionswerten führt. Beispielsweise wurde für einen auffälligen Wert geprüft, wie sich verschiedene Skalierungen auf den Wert auswirken:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Beispiel für die Untersuchung möglicher Dezimalverschiebungen</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>z70222 <span class="ot">&lt;-</span> analysis_matrix[, <span class="st">"Z70222_at"</span>]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  z70222,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">decreasing =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.last =</span> <span class="cn">NA</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           35            49             8            26            27 
+ 9.598543e+13  7.648682e+02  4.605345e+02  4.571733e+02  3.617459e+02 
+            1            14             9            37            38 
+ 3.024212e+02  2.813965e+02  2.479752e+02  2.477680e+02  2.444017e+02 
+           17            43            16            23            18 
+ 1.499735e+02  1.110951e+02  1.073175e+02  7.923535e+01  5.374350e+01 
+           22            47            32            25            24 
+ 4.517825e+01  2.283448e+01  2.091633e+01  1.154208e+01 -4.494300e-01 
+           54            44            51            50            60 
+-2.591034e+01 -5.382497e+01 -6.671857e+01 -6.881217e+01 -8.455538e+01 
+           65            63            71             2            66 
+-9.106516e+01 -1.025537e+02 -1.066791e+02 -1.247223e+02 -1.356036e+02 
+           34            58            40            19            67 
+-1.439301e+02 -1.620775e+02 -1.628997e+02 -1.636086e+02 -1.674286e+02 
+           13            42            57            59            52 
+-1.903890e+02 -1.991447e+02 -2.194676e+02 -2.372809e+02 -2.383273e+02 
+           62            29            15            46            45 
+-2.406940e+02 -2.501105e+02 -2.537310e+02 -2.791312e+02 -2.859763e+02 
+           48             3             7            68            12 
+-2.936264e+02 -3.056098e+02 -3.162323e+02 -3.204407e+02 -3.290923e+02 
+           21            36            72             6            70 
+-3.777296e+02 -4.078226e+02 -4.181079e+02 -4.629312e+02 -4.658148e+02 
+           55            56            20             5            69 
+-4.697972e+02 -4.840019e+02 -5.968431e+02 -6.728367e+02 -6.768404e+02 
+           41            31            10             4            61 
+-8.069665e+02 -1.050156e+03 -1.051989e+03 -1.104268e+03 -1.105451e+03 
+           30            39            33            11            28 
+-1.171446e+03 -1.193765e+03 -1.399042e+03 -1.631848e+03 -1.945809e+03 
+           53            64 
+-1.983056e+03 -2.132588e+03 </code></pre>
+</div>
+</div>
+<p>Anschließend wurden die möglichen Skalierungen untersucht:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mögliche Skalierungen des Extremwertes</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>z70222_clean <span class="ot">&lt;-</span> z70222[z70222 <span class="sc">&lt;</span> <span class="dv">10000</span>]</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z70222_clean)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-2132.588  -464.373  -199.145  -327.593     5.546   764.868 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  z70222_clean,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">probs =</span> <span class="fu">c</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.01</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.05</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.25</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.50</span>,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.75</span>,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.95</span>,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.99</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          1%           5%          25%          50%          75%          95% 
+-2027.915782 -1515.444909  -464.373009  -199.144738     5.546327   332.083569 
+         99% 
+  551.834642 </code></pre>
+</div>
+</div>
+<p>Die Untersuchung zeigte, dass sich für die betroffenen Extremwerte keine eindeutige allgemeingültige Dezimalverschiebung bestimmen ließ. Daher wurde keine willkürliche Skalierung auf die Werte angewendet.</p>
+</section>
+<section id="bereinigung-der-extremwerte" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="bereinigung-der-extremwerte"><span class="header-section-number">2.8</span> Bereinigung der Extremwerte</h2>
+<p>Da die untersuchten Extremwerte nicht eindeutig rekonstruiert werden konnten, wurden die entsprechenden Werte in der bereinigten Matrix als fehlend (NA) behandelt.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bereinigte Version der Analysis Matrix</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>analysis_matrix_clean <span class="ot">&lt;-</span> analysis_matrix</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>##Qualitätskontrolle der bereinigten Matrix</p>
+<p>Nach der Bereinigung wurde überprüft, wie viele fehlende Werte die Matrix nun enthält.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzahl fehlender Werte</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(analysis_matrix_clean))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18</code></pre>
+</div>
+</div>
+<p>Zusätzlich wurde kontrolliert, ob weiterhin Werte außerhalb des definierten Wertebereichs vorhanden sind.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Werte oberhalb von 1e6</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  analysis_matrix_clean <span class="sc">&gt;</span> <span class="fl">1e6</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Werte unterhalb von -1e6</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  analysis_matrix_clean <span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">1e6</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>Für die bereinigte Matrix wurden 118 fehlende Werte festgestellt. Gleichzeitig wurden keine Werte oberhalb von (10^6) und keine Werte unterhalb von (-10^6) mehr gefunden. Die statistische Verteilung der bereinigten Matrix wurde abschließend zusammengefasst:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.vector</span>(analysis_matrix_clean)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Min.    1st Qu.     Median       Mean    3rd Qu.       Max.        NAs 
+-6.272e+04 -7.860e+02 -4.330e+02  3.893e+08  2.430e+02  9.599e+13         18 </code></pre>
+</div>
+</div>
+<p>Die bereinigte Matrix weist damit keine der zuvor identifizierten extrem großen Werte mehr auf.</p>
+</section>
+<section id="finale-konsistenzkontrolle" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="finale-konsistenzkontrolle"><span class="header-section-number">2.9</span> Finale Konsistenzkontrolle</h2>
+<p>Zum Abschluss wurde überprüft, ob die Dimensionen und die Zuordnung von Samples und Features weiterhin korrekt sind.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dimension überprüfen</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(analysis_matrix_clean)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   72 7131</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample-Zuordnung überprüfen</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(analysis_matrix_clean) <span class="sc">==</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    metadata<span class="sc">$</span>Sample</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature-Zuordnung überprüfen</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(analysis_matrix_clean) <span class="sc">==</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    features</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Die Matrix umfasst weiterhin 72 Samples und 7131 Features. Die Sample- und Feature-Zuordnungen stimmen mit den Metadaten bzw. dem ursprünglichen Feature-Vektor überein.</p>
+</section>
+<section id="finale-analyse-matrix" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="finale-analyse-matrix"><span class="header-section-number">2.10</span> Finale Analyse Matrix</h2>
+<p>Die bereinigte Matrix wurde anschließend als gemeinsame Analysis Matrix für die nachfolgenden Analysen definiert.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finale Analysis Matrix</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>analysis_matrix <span class="ot">&lt;-</span> analysis_matrix_clean</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Finale Dimension</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(analysis_matrix)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   72 7131</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finale Anzahl fehlender Werte</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(analysis_matrix))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="ergebnisse" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Ergebnisse</h1>
+<section id="qaqc-und-explorative-datenanalyse" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="qaqc-und-explorative-datenanalyse"><span class="header-section-number">3.1</span> QA/QC und explorative Datenanalyse</h2>
 <p>Zu Beginn wurde die Qualität und Struktur der Expressionsdaten überprüft. Dazu wurden Dimensionen und die Struktur der Analyse-Matrix sowie die Metadaten betrachtet. Zusätzlich wurde überprüft, ob fehlende Werte in der Analyse-Matrix vorhanden sind.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Struktur der Analyse-Matrix</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(analysis_matrix)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Struktur der Analyse-Matrix</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(analysis_matrix)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> num [1:72, 1:7131] -1363 -796 -679 -1164 -1300 ...
  - attr(*, "dimnames")=List of 2
   ..$ : chr [1:72] "39" "40" "42" "47" ...
   ..$ : chr [1:7131] "AFFX-BioB-5_at" "AFFX-BioB-M_at" "AFFX-BioB-3_at" "AFFX-BioC-5_at" ...</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Struktur der Metadaten</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(metadata)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Struktur der Metadaten</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(metadata)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   72 obs. of  8 variables:
  $ Sample   : chr  "39" "40" "42" "47" ...
@@ -196,32 +824,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  $ Diagnosis: Factor w/ 2 levels "ALL","AML": 1 1 1 1 1 1 1 1 1 1 ...
  $ Dataset  : chr  "independent" "independent" "independent" "independent" ...</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fehlende Werte insgesamt</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(analysis_matrix))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fehlende Werte insgesamt</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(analysis_matrix))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 118</code></pre>
+<pre><code>[1] 18</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzahl der Gene mit mindestens einem fehlenden Wert</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">colSums</span>(<span class="fu">is.na</span>(analysis_matrix)) <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzahl der Gene mit mindestens einem fehlenden Wert</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">colSums</span>(<span class="fu">is.na</span>(analysis_matrix)) <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 72</code></pre>
+<pre><code>[1] 17</code></pre>
 </div>
 </div>
-<section id="verteilung-der-expressionswerte" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="verteilung-der-expressionswerte"><span class="header-section-number">2.1.1</span> Verteilung der Expressionswerte</h3>
+<section id="verteilung-der-expressionswerte" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="verteilung-der-expressionswerte"><span class="header-section-number">3.1.1</span> Verteilung der Expressionswerte</h3>
 <p>Anschließend wurde die Verteilung der Genexpressionswerte untersucht. Hierzu wurden deskriptive Kennwerte berechnet und die Expressionswerte in einem Histogramm dargestellt.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.vector</span>(analysis_matrix))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.vector</span>(analysis_matrix))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.      NAs 
--62718.7   -785.7   -432.7    648.9    241.7 998673.0      118 </code></pre>
+<pre><code>      Min.    1st Qu.     Median       Mean    3rd Qu.       Max.        NAs 
+-6.272e+04 -7.860e+02 -4.330e+02  3.893e+08  2.430e+02  9.599e+13         18 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.vector</span>(analysis_matrix),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">50</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Verteilung der Genexpressionswerte"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Expressionswert"</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.vector</span>(analysis_matrix),</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">50</span>,</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Verteilung der Genexpressionswerte"</span>,</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Expressionswert"</span></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-histogramm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -236,18 +864,18 @@ Abbildung&nbsp;1: Verteilung der Genexpressionswerte.
 </div>
 </div>
 </section>
-<section id="verteilung-der-expressionswerte-pro-probe" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="verteilung-der-expressionswerte-pro-probe"><span class="header-section-number">2.1.2</span> Verteilung der Expressionswerte pro Probe</h3>
+<section id="verteilung-der-expressionswerte-pro-probe" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="verteilung-der-expressionswerte-pro-probe"><span class="header-section-number">3.1.2</span> Verteilung der Expressionswerte pro Probe</h3>
 <p>Um zu überprüfen, ob sich die einzelnen Proben hinsichtlich ihrer Expressionswerte deutlich von den übrigen Proben unterscheiden, wurden die Expressionswerte pro Probe als Boxplots dargestellt.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(analysis_matrix),</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">las =</span> <span class="dv">2</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">outline =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Verteilung der Genexpressionswerte pro Probe"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Probe"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Expressionswert"</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(analysis_matrix),</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">las =</span> <span class="dv">2</span>,</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">outline =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Verteilung der Genexpressionswerte pro Probe"</span>,</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Probe"</span>,</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Expressionswert"</span></span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-boxplot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -262,23 +890,23 @@ Abbildung&nbsp;2: Verteilung der Expressionswerte pro Probe.
 </div>
 </div>
 </section>
-<section id="mittlere-expressionswerte-pro-probe" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="mittlere-expressionswerte-pro-probe"><span class="header-section-number">2.1.3</span> Mittlere Expressionswerte pro Probe</h3>
+<section id="mittlere-expressionswerte-pro-probe" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="mittlere-expressionswerte-pro-probe"><span class="header-section-number">3.1.3</span> Mittlere Expressionswerte pro Probe</h3>
 <p>Für die Identifikation von Proben mit besonders hohen/niedrigen mittleren Expressionswerten, wurden die Mittelwerte der Expressionswerte für jede Probe berechnet und verglichen.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(analysis_matrix, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sample_means)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(analysis_matrix, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sample_means)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
--27960.0   -685.4   -349.2    649.7    373.1  58175.3 </code></pre>
+<pre><code>      Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+-2.796e+04 -6.840e+02 -3.420e+02  3.895e+08  3.980e+02  1.333e+12 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  sample_means,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"h"</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Mittlere Expressionswerte pro Probe"</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Probe"</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Mittlerer Expressionswert"</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  sample_means,</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"h"</span>,</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Mittlere Expressionswerte pro Probe"</span>,</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Probe"</span>,</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Mittlerer Expressionswert"</span></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-mittelwerte" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -293,26 +921,26 @@ Abbildung&nbsp;3: Mittlere Expressionswerte pro Probe.
 </div>
 </div>
 </section>
-<section id="ähnlichkeit-der-proben-untereinander" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="ähnlichkeit-der-proben-untereinander"><span class="header-section-number">2.1.4</span> Ähnlichkeit der Proben untereinander</h3>
+<section id="ähnlichkeit-der-proben-untereinander" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="ähnlichkeit-der-proben-untereinander"><span class="header-section-number">3.1.4</span> Ähnlichkeit der Proben untereinander</h3>
 <p>Für die Untersuchung der Ähnlichkeit zwischen den Proben hinsichtlich ihres Genexpressionsprofils, wird die Korrelation zwischen den Proben berechnet. Die Ergebnisse wurden anschließend als Heatmap dargestellt.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sample_cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(analysis_matrix),</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.vector</span>(sample_cor))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>sample_cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(analysis_matrix),</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.vector</span>(sample_cor))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.07954 0.36120 0.51104 0.55897 0.80080 1.00000 </code></pre>
+<pre><code>      Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+-0.0058103 -0.0002023 -0.0001496  0.0369327 -0.0001249  1.0000000 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  sample_cor,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Korrelation zwischen den Proben"</span>,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Probe"</span>,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Probe"</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  sample_cor,</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Korrelation zwischen den Proben"</span>,</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Probe"</span>,</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Probe"</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-heatmap-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -327,99 +955,127 @@ Abbildung&nbsp;4: Korrelation zwischen den Proben als Heatmap.
 </div>
 </div>
 </section>
-<section id="identifikation-von-proben-mit-niedriger-mittlerer-korrelation" class="level3" data-number="2.1.5">
-<h3 data-number="2.1.5" class="anchored" data-anchor-id="identifikation-von-proben-mit-niedriger-mittlerer-korrelation"><span class="header-section-number">2.1.5</span> Identifikation von Proben mit niedriger mittlerer Korrelation</h3>
+<section id="identifikation-von-proben-mit-niedriger-mittlerer-korrelation" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5" class="anchored" data-anchor-id="identifikation-von-proben-mit-niedriger-mittlerer-korrelation"><span class="header-section-number">3.1.5</span> Identifikation von Proben mit niedriger mittlerer Korrelation</h3>
 <p>Um mögliche auffällige Proben zu identifizieren, wurde für jede Probe die mittlere Korrelation mit allen anderen probenm berechnet. Proben mit niedrigen mittleren Korrelationswerten weisen ein stärker abweichendes Genexpressionsprofil auf.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mean_cor <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(sample_cor, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mean_cor) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(analysis_matrix)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(mean_cor)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>mean_cor <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(sample_cor, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mean_cor) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(analysis_matrix)</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(mean_cor)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        6        39         3        20        48         4        23        40 
-0.2315067 0.2822873 0.2907090 0.3041643 0.3045802 0.3141391 0.3288233 0.3344182 
-       32        53         1        70        10        54        11        61 
-0.3743326 0.3887883 0.3888250 0.3938266 0.3949422 0.4017512 0.4058094 0.4072434 
-       28        31         5        24        30        67        46        41 
-0.4133126 0.4156582 0.4186053 0.4403924 0.4587340 0.4620658 0.4691911 0.4859346 
-       12        16        15        52        63        47        56         7 
-0.4899859 0.4954172 0.5077185 0.5467901 0.5478661 0.5488222 0.5602795 0.5698200 
-       33         9        59        58        64        62        21        36 
-0.5830729 0.5931527 0.6116391 0.6189978 0.6310525 0.6332706 0.6363093 0.6370124 
-       60        66        17        35        43        49        38         8 
-0.6394291 0.6480919 0.6621878 0.6640781 0.6668032 0.6755601 0.6766990 0.6774298 
-       37        19        51        69        42        57        55        44 
-0.6806421 0.6834533 0.6845219 0.6845841 0.6851594 0.6858171 0.6862166 0.6872580 
-       50        13        22        26        45        68        18        14 
-0.6900500 0.6901903 0.6921816 0.6925211 0.6941705 0.6946520 0.6948890 0.6969654 
-       29        71        25        65        72        27         2        34 
-0.6974799 0.6979863 0.6979871 0.6981169 0.6984208 0.6984844 0.7003112 0.7022119 </code></pre>
+<pre><code>         5         20         17         51         69         35         15 
+0.01314647 0.01324084 0.01328236 0.01331000 0.01340475 0.01343689 0.01344798 
+        45         47         41         38         42         25         31 
+0.01347250 0.01348061 0.01361184 0.01361301 0.01363484 0.01365302 0.01366584 
+        27         60         18         10         54         70         64 
+0.01366629 0.01369330 0.01372231 0.01377449 0.01395758 0.01398361 0.01427121 
+        44          9          8          4         30         43         59 
+0.01432848 0.01474185 0.01536067 0.01542318 0.01572651 0.01787221 0.01847956 
+        48         50         29         26         36         71         22 
+0.01902930 0.02693293 0.02723747 0.02727977 0.02728000 0.02742686 0.02761496 
+        16         72         58         19         32         65         52 
+0.02761787 0.02767523 0.02769447 0.02771318 0.02775081 0.02778834 0.02797903 
+        37         24         14         12         61         63         21 
+0.02871757 0.03317642 0.03682115 0.03810229 0.03930434 0.03931065 0.04001524 
+        68         33         11         46         57         28         39 
+0.04648753 0.04659270 0.04666345 0.04831573 0.04898571 0.04945325 0.05309501 
+         6          2         40         13         34         56         53 
+0.05909228 0.06166945 0.06222851 0.06415124 0.06415154 0.06499841 0.06540394 
+        67         23          1          7          3         62         66 
+0.07822635 0.08061390 0.08865265 0.09521093 0.09705071 0.09912869 0.09952236 
+        55         49 
+0.10297909 0.10661062 </code></pre>
 </div>
 </div>
 </section>
-<section id="korrelation-der-auffälligsten-probe-mit-übrigen-proben" class="level3" data-number="2.1.6">
-<h3 data-number="2.1.6" class="anchored" data-anchor-id="korrelation-der-auffälligsten-probe-mit-übrigen-proben"><span class="header-section-number">2.1.6</span> Korrelation der auffälligsten Probe mit übrigen Proben</h3>
+<section id="korrelation-der-auffälligsten-probe-mit-übrigen-proben" class="level3" data-number="3.1.6">
+<h3 data-number="3.1.6" class="anchored" data-anchor-id="korrelation-der-auffälligsten-probe-mit-übrigen-proben"><span class="header-section-number">3.1.6</span> Korrelation der auffälligsten Probe mit übrigen Proben</h3>
 <p>Anschließend wurden die Probe mit niedrigster mittlerer Korrelation genauer betrachtet und ihre Korrelation mit den übrigen Proben bestimmt</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(sample_cor[<span class="st">"39"</span>, ])</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(sample_cor[<span class="st">"39"</span>, ])</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       48         3        20         4        32        40        23         1 
-0.1076756 0.1123789 0.1169101 0.1204228 0.1364577 0.1386742 0.1418666 0.1537664 
-        6         5        54        67        16        15        28        24 
-0.1546700 0.1687316 0.1735195 0.1802601 0.1831096 0.1907772 0.1942373 0.2057766 
-       63        52        47        59         9        17         8        21 
-0.2207703 0.2281497 0.2320121 0.2417588 0.2420610 0.2495408 0.2557487 0.2557708 
-       19        14        60        26        66        37        68        43 
-0.2697484 0.2702016 0.2716177 0.2721626 0.2734636 0.2766135 0.2785984 0.2787066 
-       69         2        38        29        64        25        36        35 
-0.2796613 0.2799428 0.2821807 0.2822144 0.2830286 0.2835735 0.2837868 0.2840753 
-       65        34        50        71        22        51        42        62 
-0.2889293 0.2900743 0.2902102 0.2903349 0.2906066 0.2924492 0.2937824 0.2940986 
-       72        58        18        33        13        45        27         7 
-0.2960072 0.2963332 0.2975303 0.2986755 0.2986891 0.3015779 0.3033069 0.3047917 
-       49        57        55        44        30        56        41        46 
-0.3048035 0.3110831 0.3158713 0.3165844 0.3282154 0.3467983 0.3522492 0.3553048 
-       12        53        11        31        10        61        70        39 
-0.3812053 0.4185491 0.4405002 0.4644961 0.4652410 0.4664152 0.4753497 1.0000000 </code></pre>
+<pre><code>            8            32            65            18            35 
+-4.408286e-03 -4.188454e-03 -4.066119e-03 -4.058985e-03 -4.048065e-03 
+            4            47            20            51            50 
+-3.909487e-03 -3.856095e-03 -3.357470e-03 -3.355819e-03 -3.099778e-03 
+           41            61            63            60            54 
+-3.060628e-03 -2.845490e-03 -2.828149e-03 -2.711602e-03 -2.623260e-03 
+           72            26            16            69            58 
+-2.484808e-03 -2.417930e-03 -2.379838e-03 -2.377015e-03 -2.271783e-03 
+           46            19            45            38             5 
+-2.255569e-03 -2.214120e-03 -2.118208e-03 -2.116820e-03 -2.096440e-03 
+           27            17            22            14            43 
+-2.047908e-03 -2.016733e-03 -1.912905e-03 -1.853400e-03 -1.269049e-03 
+           21            12            37            28            57 
+-1.169174e-03 -8.291381e-04 -3.190807e-04 -3.150394e-04 -3.137678e-04 
+           36            42            10            64            70 
+-1.933943e-04  6.458945e-05  1.424891e-04  2.522232e-04  2.775484e-04 
+           33            68            11             2            13 
+ 4.903748e-04  5.147025e-04  7.540731e-04  1.190511e-03  1.333300e-03 
+           34            44             9            56            29 
+ 1.333346e-03  1.659601e-03  1.813341e-03  4.627319e-03  5.869561e-03 
+           15            30            71            31            52 
+ 6.203646e-03  6.929482e-03  6.973775e-03  7.461292e-03  8.359492e-03 
+           59            48            24            25             3 
+ 1.431514e-02  1.452619e-02  1.522740e-02  1.671709e-02  1.123789e-01 
+           40            23             1             6            67 
+ 1.386742e-01  1.418666e-01  1.537664e-01  1.546700e-01  1.802601e-01 
+           66            62             7            49            55 
+ 2.734636e-01  2.940986e-01  3.047917e-01  3.048035e-01  3.158713e-01 
+           53            39 
+ 4.185491e-01  1.000000e+00 </code></pre>
 </div>
 </div>
 </section>
-<section id="mittlere-korrelation-ohne-selbstkorrelation" class="level3" data-number="2.1.7">
-<h3 data-number="2.1.7" class="anchored" data-anchor-id="mittlere-korrelation-ohne-selbstkorrelation"><span class="header-section-number">2.1.7</span> Mittlere Korrelation ohne Selbstkorrelation</h3>
+<section id="mittlere-korrelation-ohne-selbstkorrelation" class="level3" data-number="3.1.7">
+<h3 data-number="3.1.7" class="anchored" data-anchor-id="mittlere-korrelation-ohne-selbstkorrelation"><span class="header-section-number">3.1.7</span> Mittlere Korrelation ohne Selbstkorrelation</h3>
 <p>Für die Bestimmung der mittleren Korrelation wurde anschließend die Selbskorrelation der jeweiligen Probe ausgeschlossen.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sample_cor_no_diag <span class="ot">&lt;-</span> sample_cor</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(sample_cor_no_diag) <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>mean_cor <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(sample_cor_no_diag, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mean_cor) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(analysis_matrix)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(mean_cor)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>sample_cor_no_diag <span class="ot">&lt;-</span> sample_cor</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(sample_cor_no_diag) <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>mean_cor <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(sample_cor_no_diag, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mean_cor) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(analysis_matrix)</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(mean_cor)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        6        39         3        20        48         4        23        40 
-0.2206828 0.2721787 0.2807190 0.2943638 0.2947856 0.3044791 0.3193701 0.3250438 
-       32        53         1        70        10        54        11        61 
-0.3655204 0.3801796 0.3802169 0.3852889 0.3864203 0.3933252 0.3974405 0.3988947 
-       28        31         5        24        30        67        46        41 
-0.4050494 0.4074280 0.4104166 0.4325106 0.4511106 0.4544893 0.4617150 0.4786942 
-       12        16        15        52        63        47        56         7 
-0.4828026 0.4883104 0.5007849 0.5404069 0.5414980 0.5424675 0.5540863 0.5637611 
-       33         9        59        58        64        62        21        36 
-0.5772006 0.5874224 0.6061692 0.6136316 0.6258561 0.6281054 0.6311869 0.6318999 
-       60        66        17        35        43        49        38         8 
-0.6343507 0.6431354 0.6574299 0.6593469 0.6621103 0.6709906 0.6721455 0.6728866 
-       37        19        51        69        42        57        55        44 
-0.6761441 0.6789949 0.6800785 0.6801416 0.6807251 0.6813920 0.6817971 0.6828532 
-       50        13        22        26        45        68        18        14 
-0.6856845 0.6858267 0.6878461 0.6881904 0.6898630 0.6903513 0.6905916 0.6926973 
-       29        71        25        65        72        27         2        34 
-0.6932191 0.6937325 0.6937334 0.6938650 0.6941732 0.6942377 0.6960902 0.6980177 </code></pre>
+<pre><code>            5            20            17            51            69 
+-7.528724e-04 -6.571760e-04 -6.150719e-04 -5.870400e-04 -4.909537e-04 
+           35            15            45            47            41 
+-4.583661e-04 -4.471167e-04 -4.222489e-04 -4.140264e-04 -2.809492e-04 
+           38            42            25            31            27 
+-2.797671e-04 -2.576315e-04 -2.391947e-04 -2.261915e-04 -2.257368e-04 
+           60            18            10            54            70 
+-1.983473e-04 -1.689215e-04 -1.160103e-04  6.965839e-05  9.605636e-05 
+           64            44             9             8             4 
+ 3.877108e-04  4.457875e-04  8.649699e-04  1.492513e-03  1.555902e-03 
+           30            43            59            48            50 
+ 1.863508e-03  4.039419e-03  4.655333e-03  5.212812e-03  1.322776e-02 
+           29            26            36            71            22 
+ 1.353659e-02  1.357948e-02  1.357972e-02  1.372864e-02  1.391940e-02 
+           16            72            58            19            32 
+ 1.392235e-02  1.398052e-02  1.400002e-02  1.401900e-02  1.405716e-02 
+           65            52            37            24            14 
+ 1.409521e-02  1.428860e-02  1.503753e-02  1.955919e-02  2.325525e-02 
+           12            61            63            21            68 
+ 2.455444e-02  2.577341e-02  2.577981e-02  2.649433e-02  3.305778e-02 
+           33            11            46            57            28 
+ 3.316443e-02  3.323618e-02  3.491172e-02  3.559114e-02  3.606527e-02 
+           39             6             2            40            13 
+ 3.975832e-02  4.584006e-02  4.845353e-02  4.902046e-02  5.097027e-02 
+           34            56            53            67            23 
+ 5.097058e-02  5.182938e-02  5.224061e-02  6.524363e-02  6.766480e-02 
+            1             7             3            62            66 
+ 7.581677e-02  8.246742e-02  8.433312e-02  8.644037e-02  8.683957e-02 
+           55            49 
+ 9.034499e-02  9.402767e-02 </code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="hauptkomponentenanalyse-pca" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="hauptkomponentenanalyse-pca"><span class="header-section-number">2.2</span> Hauptkomponentenanalyse (PCA)</h2>
+<section id="hauptkomponentenanalyse-pca" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="hauptkomponentenanalyse-pca"><span class="header-section-number">3.2</span> Hauptkomponentenanalyse (PCA)</h2>
 <p>Die erste Hauptkomponente (PC1) erklärte 20,58 % und die zweite Hauptkomponente (PC2) 12,26 % der Gesamtvarianz. Zusammen erklärten PC1 und PC2 somit 32,84 % der Varianz im Datensatz. Die Verteilung der erklärten Varianz ist in Abbildung 1 dargestellt.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -445,63 +1101,63 @@ Abbildung&nbsp;4: Korrelation zwischen den Proben als Heatmap.
 </div>
 <p><em>Abbildung 3: Features mit den stärksten positiven und negativen Loadings auf PC1.</em></p>
 </section>
-<section id="clustering" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="clustering"><span class="header-section-number">2.3</span> Clustering</h2>
-<section id="fragestellung-1" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="fragestellung-1"><span class="header-section-number">2.3.1</span> Fragestellung</h3>
+<section id="clustering" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="clustering"><span class="header-section-number">3.3</span> Clustering</h2>
+<section id="fragestellung-1" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="fragestellung-1"><span class="header-section-number">3.3.1</span> Fragestellung</h3>
 <p>Ziel der Clusteranalyse war es zu untersuchen, ob sich anhand der Genexpressionsprofile ohne Verwendung der bekannten Diagnose natürliche Gruppen innerhalb der Proben identifizieren lassen und ob diese Gruppen mit den Diagnosen ALL und AML übereinstimmen.</p>
 </section>
-<section id="datenvorbereitung" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="datenvorbereitung"><span class="header-section-number">2.3.2</span> Datenvorbereitung</h3>
+<section id="datenvorbereitung" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="datenvorbereitung"><span class="header-section-number">3.3.2</span> Datenvorbereitung</h3>
 <p>Für die Clusteranalyse wurde die zuvor bereinigte Expressionsmatrix verwendet. Features mit fehlenden Werten wurden ausgeschlossen, da die verwendeten Distanz- und Clusteringverfahren vollständige Daten voraussetzen. Anschließend wurden die 25 % der Features mit der höchsten Varianz ausgewählt. Dadurch sollten wenig variable Features, die nur wenig zur Unterscheidung der Proben beitragen, bei der Distanzberechnung weniger Einfluss erhalten. Die Feature-Auswahl erfolgte unabhängig von der bekannten Diagnose, um den unüberwachten Charakter der Clusteranalyse zu erhalten.</p>
 <p>Die ausgewählten Features wurden anschließend standardisiert. Dadurch besitzen die Features einen Mittelwert von 0 und eine Standardabweichung von 1, sodass Unterschiede in der Größenordnung der Expressionswerte die Distanzberechnung nicht dominieren.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>features_with_na <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">is.na</span>(analysis_matrix)) <span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>clustering_matrix <span class="ot">&lt;-</span> analysis_matrix[, <span class="sc">!</span>features_with_na]</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>feature_variance <span class="ot">&lt;-</span> <span class="fu">apply</span>(clustering_matrix, <span class="dv">2</span>, var)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>variance_cutoff <span class="ot">&lt;-</span> <span class="fu">quantile</span>(feature_variance, <span class="fl">0.75</span>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>variable_features <span class="ot">&lt;-</span> feature_variance <span class="sc">&gt;=</span> variance_cutoff</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>clustering_variable <span class="ot">&lt;-</span> clustering_matrix[, variable_features]</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>clustering_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(clustering_variable)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>features_with_na <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">is.na</span>(analysis_matrix)) <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>clustering_matrix <span class="ot">&lt;-</span> analysis_matrix[, <span class="sc">!</span>features_with_na]</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>feature_variance <span class="ot">&lt;-</span> <span class="fu">apply</span>(clustering_matrix, <span class="dv">2</span>, var)</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>variance_cutoff <span class="ot">&lt;-</span> <span class="fu">quantile</span>(feature_variance, <span class="fl">0.75</span>)</span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>variable_features <span class="ot">&lt;-</span> feature_variance <span class="sc">&gt;=</span> variance_cutoff</span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>clustering_variable <span class="ot">&lt;-</span> clustering_matrix[, variable_features]</span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>clustering_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(clustering_variable)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="hierarchisches-clustering" class="level3" data-number="2.3.3">
-<h3 data-number="2.3.3" class="anchored" data-anchor-id="hierarchisches-clustering"><span class="header-section-number">2.3.3</span> Hierarchisches Clustering</h3>
+<section id="hierarchisches-clustering" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="hierarchisches-clustering"><span class="header-section-number">3.3.3</span> Hierarchisches Clustering</h3>
 <p>Für das hierarchische Clustering wurden euklidische Distanzen zwischen den Proben auf Grundlage der standardisierten Expressionswerte berechnet. Als Linkage-Methode wurde Ward.D2 verwendet. Dabei werden schrittweise diejenigen Cluster zusammengeführt, deren Zusammenführung zu einem möglichst geringen Anstieg der Streuung innerhalb der Cluster führt. Das resultierende Dendrogramm wurde anschließend in zwei Cluster unterteilt, um die erhaltene Gruppierung mit den beiden Diagnosen ALL und AML vergleichen zu können.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>sample_dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(clustering_scaled, <span class="at">method =</span> <span class="st">"euclidean"</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">&lt;-</span> <span class="fu">hclust</span>(sample_dist, <span class="at">method =</span> <span class="st">"ward.D2"</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  hc,</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Hierarchisches Clustering der Proben"</span>,</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Probe"</span>,</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Distanz"</span>,</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">""</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>sample_dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(clustering_scaled, <span class="at">method =</span> <span class="st">"euclidean"</span>)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">&lt;-</span> <span class="fu">hclust</span>(sample_dist, <span class="at">method =</span> <span class="st">"ward.D2"</span>)</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  hc,</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Hierarchisches Clustering der Proben"</span>,</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Probe"</span>,</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Distanz"</span>,</span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">""</span></span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>hc_clusters <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hc, <span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>hc_clusters <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hc, <span class="at">k =</span> <span class="dv">2</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><em>Abbildung 4: Hierarchisches Clustering der Proben anhand der Genexpressionsprofile.</em></p>
 </section>
-<section id="vergleich-mit-der-allaml-diagnose" class="level3" data-number="2.3.4">
-<h3 data-number="2.3.4" class="anchored" data-anchor-id="vergleich-mit-der-allaml-diagnose"><span class="header-section-number">2.3.4</span> Vergleich mit der ALL/AML-Diagnose</h3>
+<section id="vergleich-mit-der-allaml-diagnose" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="vergleich-mit-der-allaml-diagnose"><span class="header-section-number">3.3.4</span> Vergleich mit der ALL/AML-Diagnose</h3>
 <p>Das hierarchische Clustering ergab zwei unterschiedlich große Cluster. Cluster 1 umfasste 16 Proben und Cluster 2 umfasste 56 Proben. Um zu untersuchen, ob diese Gruppierung mit der bekannten Diagnose übereinstimmt, wurde die Verteilung der ALL- und AML-Proben auf die beiden Cluster betrachtet.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cluster_diagnosis <span class="ot">&lt;-</span> <span class="fu">table</span>(</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Cluster =</span> hc_clusters,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diagnosis =</span> metadata<span class="sc">$</span>Diagnosis</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>cluster_diagnosis</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>cluster_diagnosis <span class="ot">&lt;-</span> <span class="fu">table</span>(</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Cluster =</span> hc_clusters,</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diagnosis =</span> metadata<span class="sc">$</span>Diagnosis</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>cluster_diagnosis</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Diagnosis
 Cluster ALL AML
@@ -512,8 +1168,8 @@ Cluster ALL AML
 <p>Cluster 1 enthielt 10 ALL- und 6 AML-Proben, während Cluster 2 aus 37 ALL- und 19 AML-Proben bestand. Beide Diagnosen waren somit in beiden Clustern vertreten. Eine eindeutige Trennung der Proben nach ALL und AML war anhand der Clusterzugehörigkeit nicht erkennbar.</p>
 <p>Um zu prüfen, ob dennoch ein statistischer Zusammenhang zwischen Clusterzugehörigkeit und Diagnose bestand, wurde ein Fisher-Exakt-Test durchgeführt.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fisher_result <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(cluster_diagnosis)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fisher_result</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>fisher_result <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(cluster_diagnosis)</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>fisher_result</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Fisher's Exact Test for Count Data
@@ -530,30 +1186,30 @@ odds ratio
 </div>
 <p>Der Fisher-Exakt-Test ergab keinen statistisch signifikanten Zusammenhang zwischen Clusterzugehörigkeit und ALL/AML-Diagnose (p = 0,775). Die durch das hierarchische Clustering identifizierte Gruppierung entsprach somit nicht der bekannten diagnostischen Einteilung in ALL und AML.</p>
 </section>
-<section id="heatmap-der-expressionsprofile" class="level3" data-number="2.3.5">
-<h3 data-number="2.3.5" class="anchored" data-anchor-id="heatmap-der-expressionsprofile"><span class="header-section-number">2.3.5</span> Heatmap der Expressionsprofile</h3>
+<section id="heatmap-der-expressionsprofile" class="level3" data-number="3.3.5">
+<h3 data-number="3.3.5" class="anchored" data-anchor-id="heatmap-der-expressionsprofile"><span class="header-section-number">3.3.5</span> Heatmap der Expressionsprofile</h3>
 <p>Zur Visualisierung der Expressionsmuster wurden die 50 Features mit der höchsten Varianz dargestellt. Die Heatmap basiert auf den zuvor standardisierten Expressionswerten. Die Proben wurden in der Heatmap erneut anhand euklidischer Distanzen und Ward.D2 hierarchisch angeordnet. Zusätzlich wurde die bekannte ALL/AML-Diagnose der einzelnen Proben als Annotation dargestellt.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>top50_names <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(feature_variance, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>])</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>heatmap_matrix <span class="ot">&lt;-</span> clustering_scaled[, top50_names]</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>heatmap_matrix_t <span class="ot">&lt;-</span> <span class="fu">t</span>(heatmap_matrix)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>annotation_col <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diagnosis =</span> metadata<span class="sc">$</span>Diagnosis</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(annotation_col) <span class="ot">&lt;-</span> metadata<span class="sc">$</span>Sample</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  heatmap_matrix_t,</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotation_col =</span> annotation_col,</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">"euclidean"</span>,</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">clustering_method =</span> <span class="st">"ward.D2"</span>,</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_colnames =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Expressionsprofile der 50 variabelsten Features"</span></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>top50_names <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(feature_variance, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>])</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>heatmap_matrix <span class="ot">&lt;-</span> clustering_scaled[, top50_names]</span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>heatmap_matrix_t <span class="ot">&lt;-</span> <span class="fu">t</span>(heatmap_matrix)</span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>annotation_col <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diagnosis =</span> metadata<span class="sc">$</span>Diagnosis</span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(annotation_col) <span class="ot">&lt;-</span> metadata<span class="sc">$</span>Sample</span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(</span>
+<span id="cb87-12"><a href="#cb87-12" aria-hidden="true" tabindex="-1"></a>  heatmap_matrix_t,</span>
+<span id="cb87-13"><a href="#cb87-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotation_col =</span> annotation_col,</span>
+<span id="cb87-14"><a href="#cb87-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb87-15"><a href="#cb87-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb87-16"><a href="#cb87-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">clustering_distance_cols =</span> <span class="st">"euclidean"</span>,</span>
+<span id="cb87-17"><a href="#cb87-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">clustering_method =</span> <span class="st">"ward.D2"</span>,</span>
+<span id="cb87-18"><a href="#cb87-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_colnames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb87-19"><a href="#cb87-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Expressionsprofile der 50 variabelsten Features"</span></span>
+<span id="cb87-20"><a href="#cb87-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-heatmap-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="960">
 <figure class="quarto-float quarto-float-fig figure">
@@ -571,24 +1227,24 @@ Abbildung&nbsp;5
 <p>Die Heatmap zeigte deutliche Unterschiede in den Expressionsmustern zwischen einzelnen Probengruppen. Die ALL- und AML-Proben waren jedoch über die verschiedenen Äste des hierarchischen Clusterings verteilt und bildeten keine klar voneinander getrennten Gruppen. Damit unterstützt die Visualisierung das Ergebnis des vorherigen Vergleichs zwischen Clusterzugehörigkeit und Diagnose.</p>
 <p>Die Heatmap dient dabei primär der Visualisierung charakteristischer Expressionsmuster und basiert aus Gründen der Darstellbarkeit nur auf den 50 variabelsten Features, während das zuvor durchgeführte hierarchische Clustering auf den 25 % variabelsten Features basierte.</p>
 </section>
-<section id="k-means-clustering" class="level3" data-number="2.3.6">
-<h3 data-number="2.3.6" class="anchored" data-anchor-id="k-means-clustering"><span class="header-section-number">2.3.6</span> K-means-Clustering</h3>
+<section id="k-means-clustering" class="level3" data-number="3.3.6">
+<h3 data-number="3.3.6" class="anchored" data-anchor-id="k-means-clustering"><span class="header-section-number">3.3.6</span> K-means-Clustering</h3>
 <p>Ergänzend zum hierarchischen Clustering wurde ein k-means-Clustering mit zwei Clustern durchgeführt. Dadurch sollte untersucht werden, ob ein alternatives unüberwachtes Clusteringverfahren eine vergleichbare Gruppierung der Proben ergibt. Um den Einfluss der zufälligen Initialisierung zu reduzieren, wurden 25 verschiedene Startkonfigurationen verwendet. Für die Reproduzierbarkeit wurde zuvor ein fester Zufallsstart gesetzt.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>kmeans_result <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  clustering_scaled,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">centers =</span> <span class="dv">2</span>,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nstart =</span> <span class="dv">25</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>kmeans_diagnosis <span class="ot">&lt;-</span> <span class="fu">table</span>(</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Cluster =</span> kmeans_result<span class="sc">$</span>cluster,</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diagnosis =</span> metadata<span class="sc">$</span>Diagnosis</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>kmeans_diagnosis</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>kmeans_result <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(</span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  clustering_scaled,</span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">centers =</span> <span class="dv">2</span>,</span>
+<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nstart =</span> <span class="dv">25</span></span>
+<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a>kmeans_diagnosis <span class="ot">&lt;-</span> <span class="fu">table</span>(</span>
+<span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Cluster =</span> kmeans_result<span class="sc">$</span>cluster,</span>
+<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diagnosis =</span> metadata<span class="sc">$</span>Diagnosis</span>
+<span id="cb88-12"><a href="#cb88-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb88-13"><a href="#cb88-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-14"><a href="#cb88-14" aria-hidden="true" tabindex="-1"></a>kmeans_diagnosis</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Diagnosis
 Cluster ALL AML
@@ -599,10 +1255,10 @@ Cluster ALL AML
 <p>Auch das k-means-Clustering ergab zwei Cluster mit 16 bzw. 56 Proben. Cluster 1 enthielt 10 ALL- und 6 AML-Proben, Cluster 2 enthielt 37 ALL- und 19 AML-Proben. Damit zeigte sich auch beim k-means-Clustering keine eindeutige Trennung von ALL und AML.</p>
 <p>Um zu überprüfen, ob beide Clusteringverfahren lediglich gleich große oder tatsächlich identische Cluster erzeugten, wurden die individuellen Clusterzuordnungen miteinander verglichen.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Hierarchical =</span> hc_clusters,</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Kmeans =</span> kmeans_result<span class="sc">$</span>cluster</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Hierarchical =</span> hc_clusters,</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Kmeans =</span> kmeans_result<span class="sc">$</span>cluster</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Kmeans
 Hierarchical  1  2
@@ -612,174 +1268,174 @@ Hierarchical  1  2
 </div>
 <p>Das hierarchische Clustering und das k-means-Clustering führten zu einer identischen Zuordnung aller 72 Proben. Beide Verfahren identifizierten somit dieselbe Struktur in den Expressionsdaten. Diese Gruppierung entsprach jedoch nicht der bekannten Einteilung in ALL und AML.</p>
 </section>
-<section id="sensitivitätsanalyse" class="level3" data-number="2.3.7">
-<h3 data-number="2.3.7" class="anchored" data-anchor-id="sensitivitätsanalyse"><span class="header-section-number">2.3.7</span> Sensitivitätsanalyse</h3>
+<section id="sensitivitätsanalyse" class="level3" data-number="3.3.7">
+<h3 data-number="3.3.7" class="anchored" data-anchor-id="sensitivitätsanalyse"><span class="header-section-number">3.3.7</span> Sensitivitätsanalyse</h3>
 <p>Um zu überprüfen, ob die Ergebnisse von der gewählten Datenvorverarbeitung abhängen, wurde das hierarchische Clustering zusätzlich mit unterschiedlichen Anteilen variabler Features sowie ohne Standardisierung durchgeführt.</p>
 <p>Das Clustering ohne Standardisierung führte zu einer identischen Zuordnung aller 72 Proben wie die standardisierte Analyse. Auch bei Verwendung der 10 %, 25 % und 50 % variabelsten Features waren die Clusterzuordnungen identisch. Bei Verwendung aller 7.059 vollständigen Features änderte sich die Zuordnung von vier der 72 Proben. Die fehlende Übereinstimmung der Cluster mit der ALL/AML-Diagnose blieb dabei bestehen. Die Ergebnisse erwiesen sich somit als robust gegenüber den untersuchten Varianten der Datenvorverarbeitung.</p>
 </section>
-<section id="fazit-der-clusteranalyse" class="level3" data-number="2.3.8">
-<h3 data-number="2.3.8" class="anchored" data-anchor-id="fazit-der-clusteranalyse"><span class="header-section-number">2.3.8</span> Fazit der Clusteranalyse</h3>
+<section id="fazit-der-clusteranalyse" class="level3" data-number="3.3.8">
+<h3 data-number="3.3.8" class="anchored" data-anchor-id="fazit-der-clusteranalyse"><span class="header-section-number">3.3.8</span> Fazit der Clusteranalyse</h3>
 <p>Für die gewählte Feature-Auswahl identifizierten sowohl hierarchisches Clustering als auch k-means dieselbe Gruppierung der 72 Proben in zwei Cluster mit 16 bzw. 56 Proben. Sowohl das hierarchische Clustering mit euklidischer Distanz und Ward.D2 als auch das k-means-Clustering führten zu einer identischen Zuordnung der Proben. Die gefundene Clusterstruktur entsprach jedoch nicht der bekannten Einteilung in ALL und AML. Der Fisher-Exakt-Test zeigte keinen statistisch signifikanten Zusammenhang zwischen Clusterzugehörigkeit und Diagnose (p = 0,775). Auch die Heatmap der 50 variabelsten Features zeigte keine eindeutige Trennung der beiden Diagnosegruppen.</p>
 </section>
 </section>
-<section id="differentielle-genexpression" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="differentielle-genexpression"><span class="header-section-number">2.4</span> Differentielle Genexpression</h2>
-<section id="fragestellung-2" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="fragestellung-2"><span class="header-section-number">2.4.1</span> Fragestellung</h3>
+<section id="differentielle-genexpression" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="differentielle-genexpression"><span class="header-section-number">3.4</span> Differentielle Genexpression</h2>
+<section id="fragestellung-2" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="fragestellung-2"><span class="header-section-number">3.4.1</span> Fragestellung</h3>
 <p>Unterscheiden sich ALL und AML systematisch in ihrer Genexpression und lassen sich Expressionsmerkmale identifizieren, die zwischen den beiden Leukämieformen unterschiedlich ausgeprägt sind?</p>
 </section>
-<section id="analyse" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="analyse"><span class="header-section-number">2.4.2</span> Analyse</h3>
+<section id="analyse" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="analyse"><span class="header-section-number">3.4.2</span> Analyse</h3>
 <p>Für die Analyse wurde zunächst der initiale Datensatz mit 38 Proben verwendet. Dieser umfasst 27 ALL- und 11 AML-Proben.</p>
 <p>Zur Untersuchung der differentiellen Genexpression wurde die Methode <code>limma</code> verwendet. Dabei wurde die Diagnose als Gruppierungsvariable mit den beiden Ausprägungen ALL und AML verwendet. Für die Expressionsmerkmale wurden lineare Modelle berechnet und anschließend mit <code>eBayes()</code> statistisch ausgewertet.</p>
 <p>Da gleichzeitig sehr viele Expressionsmerkmale untersucht wurden, wurden die p-Werte mit der Benjamini-Hochberg-Methode für multiples Testen korrigiert. Als Signifikanzkriterium wurde eine False Discovery Rate (FDR) von &lt; 0,05 verwendet.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Differential Gene Expression</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Vorbereitete Daten laden</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">capture.output</span>(</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"01_data_import_final.R"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(limma)</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialen Datensatz auswählen</span></span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>initial_samples <span class="ot">&lt;-</span> metadata<span class="sc">$</span>Dataset <span class="sc">==</span> <span class="st">"initial"</span></span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>analysis_matrix_initial <span class="ot">&lt;-</span> analysis_matrix[initial_samples, ]</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>metadata_initial <span class="ot">&lt;-</span> metadata[initial_samples, ]</span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gruppierungsvariable erstellen</span></span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  metadata_initial<span class="sc">$</span>Diagnosis,</span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ALL"</span>, <span class="st">"AML"</span>)</span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Designmatrix erstellen</span></span>
-<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> group)</span>
-<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Limma-Modell berechnen</span></span>
-<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lmFit</span>(</span>
-<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(analysis_matrix_initial),</span>
-<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>  design</span>
-<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">eBayes</span>(fit)</span>
-<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple-Test-Korrektur nach Benjamini-Hochberg</span></span>
-<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">topTable</span>(</span>
-<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>  fit,</span>
-<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef =</span> <span class="st">"groupAML"</span>,</span>
-<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">number =</span> <span class="cn">Inf</span>,</span>
-<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">adjust.method =</span> <span class="st">"BH"</span></span>
-<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzahl signifikanter Expressionsmerkmale</span></span>
-<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">sum</span>(results<span class="sc">$</span>adj.P.Val <span class="sc">&lt;</span> <span class="fl">0.05</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Differential Gene Expression</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Vorbereitete Daten laden</span></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">capture.output</span>(</span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"01_data_import_final.R"</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(limma)</span>
+<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialen Datensatz auswählen</span></span>
+<span id="cb92-11"><a href="#cb92-11" aria-hidden="true" tabindex="-1"></a>initial_samples <span class="ot">&lt;-</span> metadata<span class="sc">$</span>Dataset <span class="sc">==</span> <span class="st">"initial"</span></span>
+<span id="cb92-12"><a href="#cb92-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-13"><a href="#cb92-13" aria-hidden="true" tabindex="-1"></a>analysis_matrix_initial <span class="ot">&lt;-</span> analysis_matrix[initial_samples, ]</span>
+<span id="cb92-14"><a href="#cb92-14" aria-hidden="true" tabindex="-1"></a>metadata_initial <span class="ot">&lt;-</span> metadata[initial_samples, ]</span>
+<span id="cb92-15"><a href="#cb92-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-16"><a href="#cb92-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gruppierungsvariable erstellen</span></span>
+<span id="cb92-17"><a href="#cb92-17" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb92-18"><a href="#cb92-18" aria-hidden="true" tabindex="-1"></a>  metadata_initial<span class="sc">$</span>Diagnosis,</span>
+<span id="cb92-19"><a href="#cb92-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ALL"</span>, <span class="st">"AML"</span>)</span>
+<span id="cb92-20"><a href="#cb92-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb92-21"><a href="#cb92-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-22"><a href="#cb92-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Designmatrix erstellen</span></span>
+<span id="cb92-23"><a href="#cb92-23" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> group)</span>
+<span id="cb92-24"><a href="#cb92-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-25"><a href="#cb92-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Limma-Modell berechnen</span></span>
+<span id="cb92-26"><a href="#cb92-26" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lmFit</span>(</span>
+<span id="cb92-27"><a href="#cb92-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(analysis_matrix_initial),</span>
+<span id="cb92-28"><a href="#cb92-28" aria-hidden="true" tabindex="-1"></a>  design</span>
+<span id="cb92-29"><a href="#cb92-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb92-30"><a href="#cb92-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-31"><a href="#cb92-31" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">eBayes</span>(fit)</span>
+<span id="cb92-32"><a href="#cb92-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-33"><a href="#cb92-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple-Test-Korrektur nach Benjamini-Hochberg</span></span>
+<span id="cb92-34"><a href="#cb92-34" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">topTable</span>(</span>
+<span id="cb92-35"><a href="#cb92-35" aria-hidden="true" tabindex="-1"></a>  fit,</span>
+<span id="cb92-36"><a href="#cb92-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef =</span> <span class="st">"groupAML"</span>,</span>
+<span id="cb92-37"><a href="#cb92-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">number =</span> <span class="cn">Inf</span>,</span>
+<span id="cb92-38"><a href="#cb92-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">adjust.method =</span> <span class="st">"BH"</span></span>
+<span id="cb92-39"><a href="#cb92-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb92-40"><a href="#cb92-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-41"><a href="#cb92-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzahl signifikanter Expressionsmerkmale</span></span>
+<span id="cb92-42"><a href="#cb92-42" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">sum</span>(results<span class="sc">$</span>adj.P.Val <span class="sc">&lt;</span> <span class="fl">0.05</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="ergebnisse-1" class="level3" data-number="2.4.3">
-<h3 data-number="2.4.3" class="anchored" data-anchor-id="ergebnisse-1"><span class="header-section-number">2.4.3</span> Ergebnisse</h3>
+<section id="ergebnisse-1" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="ergebnisse-1"><span class="header-section-number">3.4.3</span> Ergebnisse</h3>
 <p>Insgesamt wurden 178 Expressionsmerkmale mit einer FDR &lt; 0,05 identifiziert. Damit zeigen zahlreiche Expressionsmerkmale im untersuchten Datensatz statistisch signifikante Unterschiede zwischen ALL und AML.</p>
 <p>Die Verteilung der Expressionsunterschiede und ihrer statistischen Signifikanz ist in Abbildung 4 dargestellt.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Differential-Expression-Plot</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>significant <span class="ot">&lt;-</span> results<span class="sc">$</span>adj.P.Val <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>de_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  results,</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> logFC,</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(P.Value),</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> significant</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="dv">0</span>,</span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span></span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Differential Gene Expression: AML vs. ALL"</span>,</span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Expression difference (AML vs. ALL)"</span>,</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"-log10(p-value)"</span>,</span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"FDR &lt; 0.05"</span></span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>de_plot</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Differential-Expression-Plot</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>significant <span class="ot">&lt;-</span> results<span class="sc">$</span>adj.P.Val <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a>de_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a>  results,</span>
+<span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
+<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> logFC,</span>
+<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(P.Value),</span>
+<span id="cb93-12"><a href="#cb93-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> significant</span>
+<span id="cb93-13"><a href="#cb93-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb93-14"><a href="#cb93-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb93-15"><a href="#cb93-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb93-16"><a href="#cb93-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb93-17"><a href="#cb93-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="dv">0</span>,</span>
+<span id="cb93-18"><a href="#cb93-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span></span>
+<span id="cb93-19"><a href="#cb93-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb93-20"><a href="#cb93-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb93-21"><a href="#cb93-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Differential Gene Expression: AML vs. ALL"</span>,</span>
+<span id="cb93-22"><a href="#cb93-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Expression difference (AML vs. ALL)"</span>,</span>
+<span id="cb93-23"><a href="#cb93-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"-log10(p-value)"</span>,</span>
+<span id="cb93-24"><a href="#cb93-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"FDR &lt; 0.05"</span></span>
+<span id="cb93-25"><a href="#cb93-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb93-26"><a href="#cb93-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb93-27"><a href="#cb93-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-28"><a href="#cb93-28" aria-hidden="true" tabindex="-1"></a>de_plot</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><em>Abbildung 6: Differential-Expression-Plot für den Vergleich der Genexpression zwischen AML und ALL. Die hervorgehobenen Punkte entsprechen Expressionsmerkmalen mit einer FDR &lt; 0,05.</em></p>
 </section>
-<section id="heatmap-der-top-20-expressionsmerkmale" class="level3" data-number="2.4.4">
-<h3 data-number="2.4.4" class="anchored" data-anchor-id="heatmap-der-top-20-expressionsmerkmale"><span class="header-section-number">2.4.4</span> Heatmap der Top-20-Expressionsmerkmale</h3>
+<section id="heatmap-der-top-20-expressionsmerkmale" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="heatmap-der-top-20-expressionsmerkmale"><span class="header-section-number">3.4.4</span> Heatmap der Top-20-Expressionsmerkmale</h3>
 <p>Für eine detailliertere Betrachtung wurden die 20 Expressionsmerkmale mit den kleinsten adjustierten p-Werten ausgewählt. Die Expressionswerte wurden für die Darstellung zeilenweise standardisiert.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap der Top-20 differentiell exprimierten Merkmale</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Signifikante Merkmale auswählen</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(results)[results<span class="sc">$</span>adj.P.Val <span class="sc">&lt;</span> <span class="fl">0.05</span>]</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Nur Merkmale verwenden, die in der Expressionsmatrix vorhanden sind</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> sig_genes[</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  sig_genes <span class="sc">%in%</span> <span class="fu">colnames</span>(analysis_matrix_initial)</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Merkmale mit fehlenden Werten ausschließen</span></span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> sig_genes[</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">sapply</span>(</span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    sig_genes,</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(g) <span class="fu">anyNA</span>(analysis_matrix_initial[, g])</span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Nach adjustiertem p-Wert sortieren</span></span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> sig_genes[</span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">order</span>(results[sig_genes, <span class="st">"adj.P.Val"</span>])</span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 20 auswählen</span></span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>top20_genes <span class="ot">&lt;-</span> <span class="fu">head</span>(sig_genes, <span class="dv">20</span>)</span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Expressionsmatrix für die Heatmap erstellen</span></span>
-<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>heatmap_matrix <span class="ot">&lt;-</span> <span class="fu">t</span>(</span>
-<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>  analysis_matrix_initial[, top20_genes, <span class="at">drop =</span> <span class="cn">FALSE</span>]</span>
-<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnose als Annotation</span></span>
-<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>annotation_col <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diagnose =</span> metadata_initial<span class="sc">$</span>Diagnosis</span>
-<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(annotation_col) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata_initial)</span>
-<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap erstellen</span></span>
-<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(</span>
-<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a>  heatmap_matrix,</span>
-<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="st">"row"</span>,</span>
-<span id="cb39-45"><a href="#cb39-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotation_col =</span> annotation_col,</span>
-<span id="cb39-46"><a href="#cb39-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb39-47"><a href="#cb39-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb39-48"><a href="#cb39-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_rownames =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb39-49"><a href="#cb39-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_colnames =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb39-50"><a href="#cb39-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Top 20 differentiell exprimierte Gene"</span></span>
-<span id="cb39-51"><a href="#cb39-51" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap der Top-20 differentiell exprimierten Merkmale</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Signifikante Merkmale auswählen</span></span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(results)[results<span class="sc">$</span>adj.P.Val <span class="sc">&lt;</span> <span class="fl">0.05</span>]</span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Nur Merkmale verwenden, die in der Expressionsmatrix vorhanden sind</span></span>
+<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> sig_genes[</span>
+<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a>  sig_genes <span class="sc">%in%</span> <span class="fu">colnames</span>(analysis_matrix_initial)</span>
+<span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb94-12"><a href="#cb94-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-13"><a href="#cb94-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Merkmale mit fehlenden Werten ausschließen</span></span>
+<span id="cb94-14"><a href="#cb94-14" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> sig_genes[</span>
+<span id="cb94-15"><a href="#cb94-15" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">sapply</span>(</span>
+<span id="cb94-16"><a href="#cb94-16" aria-hidden="true" tabindex="-1"></a>    sig_genes,</span>
+<span id="cb94-17"><a href="#cb94-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(g) <span class="fu">anyNA</span>(analysis_matrix_initial[, g])</span>
+<span id="cb94-18"><a href="#cb94-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb94-19"><a href="#cb94-19" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb94-20"><a href="#cb94-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-21"><a href="#cb94-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Nach adjustiertem p-Wert sortieren</span></span>
+<span id="cb94-22"><a href="#cb94-22" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> sig_genes[</span>
+<span id="cb94-23"><a href="#cb94-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">order</span>(results[sig_genes, <span class="st">"adj.P.Val"</span>])</span>
+<span id="cb94-24"><a href="#cb94-24" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb94-25"><a href="#cb94-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-26"><a href="#cb94-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 20 auswählen</span></span>
+<span id="cb94-27"><a href="#cb94-27" aria-hidden="true" tabindex="-1"></a>top20_genes <span class="ot">&lt;-</span> <span class="fu">head</span>(sig_genes, <span class="dv">20</span>)</span>
+<span id="cb94-28"><a href="#cb94-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-29"><a href="#cb94-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Expressionsmatrix für die Heatmap erstellen</span></span>
+<span id="cb94-30"><a href="#cb94-30" aria-hidden="true" tabindex="-1"></a>heatmap_matrix <span class="ot">&lt;-</span> <span class="fu">t</span>(</span>
+<span id="cb94-31"><a href="#cb94-31" aria-hidden="true" tabindex="-1"></a>  analysis_matrix_initial[, top20_genes, <span class="at">drop =</span> <span class="cn">FALSE</span>]</span>
+<span id="cb94-32"><a href="#cb94-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb94-33"><a href="#cb94-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-34"><a href="#cb94-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnose als Annotation</span></span>
+<span id="cb94-35"><a href="#cb94-35" aria-hidden="true" tabindex="-1"></a>annotation_col <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb94-36"><a href="#cb94-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diagnose =</span> metadata_initial<span class="sc">$</span>Diagnosis</span>
+<span id="cb94-37"><a href="#cb94-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb94-38"><a href="#cb94-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-39"><a href="#cb94-39" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(annotation_col) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata_initial)</span>
+<span id="cb94-40"><a href="#cb94-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-41"><a href="#cb94-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap erstellen</span></span>
+<span id="cb94-42"><a href="#cb94-42" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(</span>
+<span id="cb94-43"><a href="#cb94-43" aria-hidden="true" tabindex="-1"></a>  heatmap_matrix,</span>
+<span id="cb94-44"><a href="#cb94-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="st">"row"</span>,</span>
+<span id="cb94-45"><a href="#cb94-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotation_col =</span> annotation_col,</span>
+<span id="cb94-46"><a href="#cb94-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb94-47"><a href="#cb94-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_cols =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb94-48"><a href="#cb94-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_rownames =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb94-49"><a href="#cb94-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_colnames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb94-50"><a href="#cb94-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Top 20 differentiell exprimierte Gene"</span></span>
+<span id="cb94-51"><a href="#cb94-51" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -787,19 +1443,19 @@ Hierarchical  1  2
 <p><em>Abbildung 7: Heatmap der 20 am stärksten differentiell exprimierten Expressionsmerkmale im initialen Datensatz. Die Proben sind entsprechend ihrer Diagnose als ALL oder AML annotiert.</em></p>
 <p>Die Heatmap zeigt unterschiedliche Expressionsmuster der ausgewählten Merkmale über die untersuchten Proben. Die Annotation der Proben ermöglicht dabei einen direkten Vergleich der Expressionsmuster zwischen ALL und AML.</p>
 </section>
-<section id="interpretation" class="level3" data-number="2.4.5">
-<h3 data-number="2.4.5" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">2.4.5</span> Interpretation</h3>
+<section id="interpretation" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">3.4.5</span> Interpretation</h3>
 <p>Die Analyse zeigt, dass sich ALL und AML im untersuchten Datensatz in mehreren Expressionsmerkmalen systematisch unterscheiden. Dies unterstützt die Hypothese, dass sich die beiden Leukämieformen anhand ihrer Genexpressionsprofile unterscheiden lassen.</p>
 <p>Die identifizierten Expressionsmerkmale sollten dabei als statistisch unterschiedliche Merkmale zwischen den beiden Gruppen interpretiert werden und nicht als einzelne diagnostische Marker.</p>
 </section>
-<section id="biologische-einordnung-ausgewählter-merkmale" class="level3" data-number="2.4.6">
-<h3 data-number="2.4.6" class="anchored" data-anchor-id="biologische-einordnung-ausgewählter-merkmale"><span class="header-section-number">2.4.6</span> Biologische Einordnung ausgewählter Merkmale</h3>
+<section id="biologische-einordnung-ausgewählter-merkmale" class="level3" data-number="3.4.6">
+<h3 data-number="3.4.6" class="anchored" data-anchor-id="biologische-einordnung-ausgewählter-merkmale"><span class="header-section-number">3.4.6</span> Biologische Einordnung ausgewählter Merkmale</h3>
 <p>Unter den 20 am stärksten differentiell exprimierten Merkmalen befinden sich mehrere Probe-Sets, die bereits in früheren Analysen des Golub-Leukämiedatensatzes als relevante Merkmale für die Unterscheidung von ALL und AML beschrieben wurden.</p>
 <p>Beispielsweise entspricht <code>L08246_at</code> dem Gen <strong>MCL1 (myeloid cell leukemia 1)</strong>. MCL1 ist an der Regulation des Zellüberlebens beteiligt. <code>M11147_at</code> entspricht <strong>FTL (ferritin light chain)</strong>, einem Bestandteil des Ferritin-Komplexes, der an der intrazellulären Eisenspeicherung beteiligt ist. <code>Y00787_s_at</code> entspricht <strong>IL8/CXCL8 (Interleukin-8)</strong>, einem Chemokin, das an Entzündungs- und Signalprozessen beteiligt ist. Auch <code>U46751_at</code>, das für das p62-Protein (SQSTM1) steht, wurde in früheren Analysen des Golub-Datensatzes als relevantes Expressionsmerkmal beschrieben.</p>
 <p>Die Übereinstimmung einzelner identifizierter Merkmale mit früheren Analysen des Golub-Datensatzes unterstützt die biologische Relevanz der gefundenen Expressionsunterschiede. Die Ergebnisse stellen jedoch keine Aussage darüber dar, dass einzelne Gene allein zur Diagnose von ALL oder AML ausreichen.</p>
 </section>
-<section id="limitationen" class="level3" data-number="2.4.7">
-<h3 data-number="2.4.7" class="anchored" data-anchor-id="limitationen"><span class="header-section-number">2.4.7</span> Limitationen</h3>
+<section id="limitationen" class="level3" data-number="3.4.7">
+<h3 data-number="3.4.7" class="anchored" data-anchor-id="limitationen"><span class="header-section-number">3.4.7</span> Limitationen</h3>
 <p>Die Analyse basiert auf dem initialen Datensatz mit 38 Proben, darunter 27 ALL- und 11 AML-Proben. Aufgrund der unterschiedlichen Gruppengrößen und der insgesamt begrenzten Stichprobengröße sollten die identifizierten Expressionsunterschiede mit Vorsicht interpretiert werden.</p>
 <p>Außerdem wurden die Expressionsmerkmale anhand ihrer statistischen Signifikanz ausgewählt. Eine statistische Signifikanz einzelner Merkmale bedeutet dabei nicht automatisch eine biologische oder diagnostische Relevanz. Für eine weitergehende Bewertung wären unabhängige Datensätze und zusätzliche biologische Validierungen erforderlich.</p>
 <p>Der vollständige R-Code zur Analyse der differentiellen Genexpression ist zusätzlich im R-Skript “05_differential_expression.R” im Repository dokumentiert.</p>
