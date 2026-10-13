@@ -452,24 +452,165 @@ sort(mean_cor)
 ```
 
 ## Hauptkomponentenanalyse (PCA)
+### Datenvorbereitung
 
-Die erste Hauptkomponente (PC1) erklärte 20,58 % und die zweite Hauptkomponente (PC2) 12,26 % der Gesamtvarianz. Zusammen erklärten PC1 und PC2 somit 32,84 % der Varianz im Datensatz. Die Verteilung der erklärten Varianz ist in Abbildung 1 dargestellt.
+Für die Hauptkomponentenanalyse wurden zunächst alle Features mit fehlenden Werten ausgeschlossen, da die PCA vollständige numerische Daten voraussetzt. Anschließend wurde überprüft, ob Features ohne Variation vorhanden sind.
+```{r pca-preparation}
+#| warning: false
+#| message: false
 
-![Screeplot der PCA](figures/Screeplot.png)
+# Features mit fehlenden Werten identifizieren
+features_mit_na <- colSums(is.na(analysis_matrix)) > 0
 
-*Abbildung 1: Screeplot der Hauptkomponentenanalyse mit dem Anteil der durch die einzelnen Hauptkomponenten erklärten Varianz.*
+# Für die PCA nur Features ohne fehlende Werte verwenden
+pca_matrix <- analysis_matrix[, !features_mit_na]
 
-In der Darstellung der Proben entlang von PC1 und PC2 zeigte sich keine eindeutige Trennung zwischen den ALL- und AML-Proben. Die beiden Gruppen überlappten über weite Bereiche des PCA-Plots. Einzelne Proben lagen weiter vom Hauptbereich der übrigen Proben entfernt, insgesamt bildeten sich jedoch keine klar voneinander abgegrenzten Cluster entsprechend der Leukämieform. Die Verteilung der ALL- und AML-Proben ist in Abbildung 2 dargestellt.
+# Kontrolle
+dim(pca_matrix)
+sum(is.na(pca_matrix))
 
-![PCA der ALL- und AML-Proben](figures/PCA_ALL_AML.png)
+# Prüfen, ob Features ohne Variation vorhanden sind
+feature_sd <- apply(pca_matrix, 2, sd)
+sum(feature_sd == 0)
+```
+### Durchführung der PCA 
+Die PCA wurde auf der bereinigten Matrix durchgeführt. Dabei wurden die Features skaliert, damit Unterschiede in der Größenordnung der Expressionswerte die Hauptkomponenten nicht dominieren.
+```{r}
+# PCA mit Skalierung der Features
+pca <- prcomp(
+  pca_matrix,
+  scale. = TRUE
+)
 
-*Abbildung 2: PCA der ALL- und AML-Proben anhand der ersten beiden Hauptkomponenten.*
 
-Die Analyse der Loadings zeigte, welche Features besonders stark zu den ersten beiden Hauptkomponenten beitrugen. Zu den stärksten positiven Loadings von PC1 gehörten unter anderem CD47, TGOLN2, CRHBP und TCP1, während BBS9, SMPDL3B, AP3S2 und MPV17 zu den stärksten negativen Loadings zählten. Für PC2 zeigten PRKAR2A, PRKCE, SLC12A5, ZNF44 und NR4A3 starke positive Loadings. Zu den stärksten negativen Loadings gehörten SCN2A, FEV, MAP2K1 und MORF4L2. Die stärksten positiven und negativen Loadings von PC1 sind in Abbildung 3 dargestellt.
+# Anteil der erklärten Varianz in Prozent
+varianz <- pca$sdev^2 / sum(pca$sdev^2) * 100
 
-![Stärkste Loadings von PC1](figures/PC1_Loadings.png)
+# Erklärte Varianz von PC1 und PC2
+varianz[1:2]
 
-*Abbildung 3: Features mit den stärksten positiven und negativen Loadings auf PC1.*
+# Gemeinsam erklärte Varianz von PC1 und PC2
+sum(varianz[1:2])
+```
+Die erste Hauptkomponente (PC1) erklärte 20,58 % und die zweite Hauptkomponente (PC2) 12,26 % der Gesamtvarianz. Zusammen erklärten PC1 und PC2 somit 32,84 % der Varianz im Datensatz.
+
+### Erklärte Varianz
+Die Verteilung der erklärten Varianz über die ersten Hauptkomponenten ist im Screeplot dargestellt.
+```{r}
+#| label: fig-pca-screeplot
+#| fig-cap: "Screeplot der Hauptkomponentenanalyse mit dem Anteil der durch die einzelnen Hauptkomponenten erklärten Varianz."
+
+plot(
+  varianz[1:10],
+  type = "b",
+  xlab = "Hauptkomponente",
+  ylab = "Erklärte Varianz (%)",
+  main = "Screeplot",
+  xaxt = "n"
+)
+
+axis(
+  1,
+  at = 1:10,
+  labels = paste0("PC", 1:10)
+)
+
+```
+### PCA der ALL- und AML-Proben
+Zur Darstellung der Proben entlang der ersten beiden Hauptkomponenten wurden die PCA-Koordinaten mit den diagnostischen Informationen kombiniert.
+```{r}
+#| warning: false
+#| message: false
+
+# Koordinaten der Proben in den Hauptkomponenten
+pca_scores <- as.data.frame(pca$x)
+
+# Prüfen, ob Reihenfolge der Proben mit Metadaten übereinstimmt
+all(rownames(pca_scores) == metadata$Sample)
+
+# Diagnose und Datensatz ergänzen
+pca_scores$Diagnosis <- metadata$Diagnosis
+
+pca_scores$Dataset <- factor(
+  metadata$Dataset,
+  levels = c("initial", "independent")
+)
+```
+In der Darstellung der Proben entlang von PC1 und PC2 zeigte sich keine eindeutige Trennung zwischen den ALL- und AML-Proben. Im PCA-Plot überlappten sich die beiden Gruppen in weiten Bereichen. Einzelne Proben lagen weiter vom Hauptbereich der übrigen Proben entfernt. Es bildeten sich insgesamt jedoch keine klar voneinander abgegrenzten Cluster entsprechend der Leukämieform.
+```{r}
+#| label: fig-pca-all-aml
+#| fig-cap: "PCA der ALL- und AML-Proben anhand der ersten beiden Hauptkomponenten."
+
+plot(
+  pca_scores$PC1,
+  pca_scores$PC2,
+  col = pca_scores$Diagnosis,
+  pch = 19,
+  xlab = paste0("PC1 (", round(varianz[1], 2), " %)"),
+  ylab = paste0("PC2 (", round(varianz[2], 2), " %)"),
+  main = "PCA der Genexpressionsdaten"
+)
+
+legend(
+  "topright",
+  legend = levels(pca_scores$Diagnosis),
+  col = 1:2,
+  pch = 19
+)
+```
+### Analyse der Loadings 
+Die Analyse der Loadings zeigte, welche Features besonders stark zu den ersten beiden Hauptkomponenten beitrugen. Zu den stärksten positiven Loadings von PC1 gehörten unter anderem CD47, TGOLN2, CRHBP und TCP1, während BBS9, SMPDL3B, AP3S2 und MPV17 zu den stärksten negativen Loadings zählten. Für PC2 zeigten PRKAR2A, PRKCE, SLC12A5, ZNF44 und NR4A3 starke positive Loadings. Zu den stärksten negativen Loadings gehörten SCN2A, FEV, MAP2K1 und MORF4L2.
+```{r}
+#| warning: false
+#| message: false
+
+# Loadings der Hauptkomponenten
+loadings <- pca$rotation
+
+# Features mit den stärksten absoluten Loadings auf PC1 und PC2
+pc1_order <- order(
+  abs(loadings[, "PC1"]),
+  decreasing = TRUE
+)
+
+pc2_order <- order(
+  abs(loadings[, "PC2"]),
+  decreasing = TRUE
+)
+
+head(loadings[pc1_order, "PC1"], 10)
+head(loadings[pc2_order, "PC2"], 10)
+```
+
+```{r}
+# Fünf stärkste positive und negative PC1-Loadings
+pc1_pos <- sort(
+  loadings[, "PC1"],
+  decreasing = TRUE
+)[1:5]
+
+pc1_neg <- sort(
+  loadings[, "PC1"],
+  decreasing = FALSE
+)[1:5]
+
+pc1_top <- c(pc1_neg, pc1_pos)
+```
+
+```{r}
+#| label: fig-pca-loadings
+#| fig-cap: "Features mit den stärksten positiven und negativen Loadings auf PC1."
+
+par(mar = c(5, 6, 4, 2))
+
+barplot(
+  pc1_top,
+  horiz = TRUE,
+  las = 1,
+  xlab = "Loading",
+  main = "Stärkste Loadings auf PC1"
+)
+```
 
 ## Clustering
 
@@ -514,7 +655,7 @@ plot(
 
 hc_clusters <- cutree(hc, k = 2)
 ```
-*Abbildung 4: Hierarchisches Clustering der Proben anhand der Genexpressionsprofile.*
+*Abbildung 8: Hierarchisches Clustering der Proben anhand der Genexpressionsprofile.*
 
 ### Vergleich mit der ALL/AML-Diagnose
 
@@ -570,7 +711,7 @@ pheatmap(
   main = "Expressionsprofile der 50 variabelsten Features"
 )
 ```
-*Abbildung 5: Heatmap der 50 variabelsten Features. Die Annotation zeigt die bekannte ALL/AML-Diagnose der Proben.*
+*Abbildung 9: Heatmap der 50 variabelsten Features. Die Annotation zeigt die bekannte ALL/AML-Diagnose der Proben.*
 
 Die Heatmap zeigte deutliche Unterschiede in den Expressionsmustern zwischen einzelnen Probengruppen. Die ALL- und AML-Proben waren jedoch über die verschiedenen Äste des hierarchischen Clusterings verteilt und bildeten keine klar voneinander getrennten Gruppen. Damit unterstützt die Visualisierung das Ergebnis des vorherigen Vergleichs zwischen Clusterzugehörigkeit und Diagnose.
 
@@ -752,7 +893,7 @@ de_plot <- ggplot(
 de_plot
 ```
 
-*Abbildung 6: Differential-Expression-Plot für den Vergleich der Genexpression zwischen AML und ALL. Die hervorgehobenen Punkte entsprechen Expressionsmerkmalen mit einer FDR \< 0,05.*
+*Abbildung 10: Differential-Expression-Plot für den Vergleich der Genexpression zwischen AML und ALL. Die hervorgehobenen Punkte entsprechen Expressionsmerkmalen mit einer FDR \< 0,05.*
 
 ### Heatmap der Top-20-Expressionsmerkmale
 
@@ -812,7 +953,7 @@ pheatmap(
 )
 ```
 
-*Abbildung 7: Heatmap der 20 am stärksten differentiell exprimierten Expressionsmerkmale im initialen Datensatz. Die Proben sind entsprechend ihrer Diagnose als ALL oder AML annotiert.*
+*Abbildung 11: Heatmap der 20 am stärksten differentiell exprimierten Expressionsmerkmale im initialen Datensatz. Die Proben sind entsprechend ihrer Diagnose als ALL oder AML annotiert.*
 
 Die Heatmap zeigt unterschiedliche Expressionsmuster der ausgewählten Merkmale über die untersuchten Proben. Die Annotation der Proben ermöglicht dabei einen direkten Vergleich der Expressionsmuster zwischen ALL und AML.
 
